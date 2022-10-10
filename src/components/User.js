@@ -1,9 +1,9 @@
+import "../styles/user.css"
 
-
-function DisplayUser(){
+export default function User(){
     return(
-        <div>
-            
+        <div  className="userPage">
+           user
         </div>
     )
 }

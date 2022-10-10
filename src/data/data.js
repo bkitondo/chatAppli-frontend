@@ -1,7 +1,6 @@
 
-export default data = [
+export  const data = 
     {
         userName:"Tete",
         userLastName :"bleudy",
     }
-]
