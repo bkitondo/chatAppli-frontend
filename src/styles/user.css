@@ -6,16 +6,18 @@
     height: auto;
     border-radius: 20px;
     padding-top: 30px;
-
 }
 .profil{
-    width: 50%;
+    width: 55%;
     height: auto;
     border-radius: 100%;
     align-self: center;
 }
 .msgCircle{
-    color: write;
+    color: #fff;
+    font-size: 50px;
+    align-self: center;
+    padding: 15PX 0px;
 }
 .divPrincipal{
     display: flex;
@@ -25,10 +27,13 @@
     background: #ffe921;
     margin: 50px 0px;
     border-radius: 20px 0px 0px 20px;
+    border-radius: 20px 0px 0px 20px;
 }
-
-.containerMs{
+.containerMsg{
     background: #004be1;
-    width: 90%;
+    width: 95%;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px 0px 0px 20px;
 }
