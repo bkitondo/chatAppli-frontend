@@ -34,7 +34,7 @@ input{
     border-bottom: solid 1px #c4c4c4;    
 }
 .AllUser{
-    overflow: scroll;
+    overflow-y: auto;
     height: 430px;
 }
 ul{

@@ -1,14 +1,17 @@
-import DispayUsers from './components/DisplayUsers';
-import User from './components/User';
-import DisplayDiscussion from './components/DisplayDiscussion';
-import "./styles/App.css"
+// import DispayUsers from './components/DisplayUsers';
+// import User from './components/User';
+// import DisplayDiscussion from './components/DisplayDiscussion';
+// import "./styles/App.css"
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <div className='App' >
-      <User/>
+    <div  >
+      {/* <User/>
       <DispayUsers/>
-      <DisplayDiscussion/>
+      <DisplayDiscussion/> */}
+      <Login/>
+
     </div>
   );
 }

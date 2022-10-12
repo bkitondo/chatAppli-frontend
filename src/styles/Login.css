@@ -1,0 +1,14 @@
+.loginPage{
+    display: flex;
+    flex-direction: row;
+    padding: 0 5%;
+    /* width: 95%; */
+    height: 500px;
+}
+.item{
+    width: 50%;
+    height: auto; 
+}
+.imageLogin{
+     width: 100%;
+}
