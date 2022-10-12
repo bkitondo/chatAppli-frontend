@@ -14,7 +14,7 @@ form{
     display: flex;
     flex-direction: column;
     align-self: center;
-    margin:  30% 20%;
+    margin:  20%  20% 0;
 }
 .champ{
     outline: none;
