@@ -2,8 +2,6 @@
     display: flex;
     flex-direction: row;
     padding: 0 5%;
-    /* width: 95%; */
-    height: 500px;
 }
 .item{
     width: 50%;
@@ -11,4 +9,32 @@
 }
 .imageLogin{
      width: 100%;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin:  30% 20%;
+}
+.champ{
+    outline: none;
+    padding: 5px;
+    border-style: none;
+    border-bottom: solid 1px #2c73ff ;
+    font-size: 16px;
+    margin-top:4% ;
+}
+.bouton{
+    border-style: none;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 5%;
+    width: 100%;
+    background: #8b3eff;
+    color: #e9e8f6;
+    font-size: 16px;
+}
+.bouton:hover{
+    background:#2c73ff;
+    color: #FFF;
 }

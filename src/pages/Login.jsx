@@ -3,13 +3,14 @@ import '../styles/Login.css'
 import SignIn from '../components/Sign_in'
 import SignUp from '../components/Sign_up'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 const Login = ()=>{
 return(
     <div className='loginPage'> 
         <div className='item' >
             <img  className='imageLogin' src={login} alt="" />
         </div>
-        <BrowserRouter className='item'>
+        <BrowserRouter>
             <Routes>
                 <Route  path='/' element={<SignIn/>} />
                 <Route  path='/inscription' element={<SignUp/>}/>

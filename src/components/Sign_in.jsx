@@ -1,12 +1,13 @@
 import Menu from "./Menu"
+import '../styles/Login.css'
 
 export default function SignIn(){
     return(
-        <main>
+        <main className="item">
             <form action="">
-                <input type="text" />
-                <input type="password" />
-                <input type="submit" />    
+                <input className="champ" type="text" placeholder="Identifiant"/>
+                <input  className="champ" type="password" placeholder="Mot de passe" />
+                <input className="bouton" type="submit"  value="connexion"/>    
             </form>
             <Menu/>
         </main>
