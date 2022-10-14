@@ -1,6 +1,7 @@
 import Menu from "./Menu"
 import '../styles/Login.css'
-import { useState } from "react"
+import {useState } from "react"
+// import axios from "axios"
 
 export default function SignIn(){
     const [id,setId] = useState("")
@@ -11,11 +12,12 @@ export default function SignIn(){
           function Submit(e){
                     e.preventDefault()
           }
+
     return(
         <main className="item">
             <form action="" >
                 <input  className="champ" 
-                        type="text" 
+                        type="tel" 
                         placeholder="Identifiant" 
                         name="Id" 
                         onChange={(e)=> setId(e.target.value)} 
