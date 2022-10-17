@@ -1,8 +1,9 @@
-.App{
+.HomePage{
     display: flex;
     flex-direction: row;
     width: 96%;
     justify-content: space-between;
     padding: 2%;
     background: #eaeaea;
+    height: 600px;
 }
