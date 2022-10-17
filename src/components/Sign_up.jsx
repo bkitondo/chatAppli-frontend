@@ -19,6 +19,7 @@ export default function SignUp(){
                         phone: telephone,
                         password
         })
+
         createUser.then((res) => console.log(res)).catch((err) => console.log(err));
     }
     return(
