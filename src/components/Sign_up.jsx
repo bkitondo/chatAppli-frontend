@@ -24,7 +24,7 @@ export default function SignUp(){
     }
     return(
        <main className="item">
-            <form onSubmit={Submit}>
+            <form  className="formulaire" onSubmit={Submit}>
                 <input 
                         className="champ" 
                         type="text" 

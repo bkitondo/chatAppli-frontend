@@ -10,7 +10,7 @@
 .imageLogin{
      width: 100%;
 }
-form{
+.formulaire{
     display: flex;
     flex-direction: column;
     align-self: center;

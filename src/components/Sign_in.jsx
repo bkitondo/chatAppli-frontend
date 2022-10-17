@@ -14,7 +14,7 @@ export default function SignIn(){
 
     return(
         <main className="item">
-            <form action="" >
+            <form className="formulaire" >
                 <input  className="champ" 
                         type="tel" 
                         placeholder="Identifiant" 
