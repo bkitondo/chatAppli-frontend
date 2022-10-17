@@ -1,45 +1,20 @@
-// import DispayUsers from './components/DisplayUsers';
-// import User from './components/User';
-// import DisplayDiscussion from './components/DisplayDiscussion';
-// import "./styles/App.css"
-// import { useEffect } from "react";
-import Login from "./pages/Login";
-// import axios from "axios"
+import HomePage from './pages/HomePage';
+import Inscription from './pages/SignUp';
+import Connexion from './pages/SignIn';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
-
-  // useEffect(()=>{
-  //   axios.post("http://localhost:8080/api/auth/signup", {
-  //       name: "bleudy",
-  //       phone: 123456789
-  //   },{
-  //       headers: {
-  //           "Content-Type": "application/json"
-  //       }
-  //   })
-  //   .then((data)=>{
-  //       console.log(data);
-  //   })
-  //   .catch((error)=>{
-  //       console.log(error);
-  //   })
-  //   axios({
-  //     method: "get",
-  //     url: "http://localhost:8080/api/auth/signup",
-  //     headers: {
-  //     }
-  //   });
-  // }, [])
-
   return (
-    <div  >
-      {/* <User/>
-      <DispayUsers/>
-      <DisplayDiscussion/> */}
-      <Login/>
-
+    <div>
+      <BrowserRouter>
+          <Routes>
+              <Route path='/' element={<Inscription/>} />
+              <Route path='/inscription' element={<Connexion/>} />
+              <Route path='/accueil' element={<HomePage/>} />
+          </Routes>
+      </BrowserRouter>
     </div>
   );
 }
-
 export default App;

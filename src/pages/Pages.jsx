@@ -1,10 +1,11 @@
 import login from '../media/login.jpg'
-import '../styles/Login.css'
+import '../styles/Pages.css'
 import SignIn from '../components/Sign_in'
 import SignUp from '../components/Sign_up'
+// import HomePage from './HomePage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-const Login = ()=>{
+const Pages = ()=>{
 return(
     <div className='loginPage'> 
         <div className='item' >
@@ -12,11 +13,12 @@ return(
         </div>
         <BrowserRouter>
             <Routes>
-                <Route  path='/' element={<SignIn/>} />
+                <Route  path='/connexion' element={<SignIn/>} />
                 <Route  path='/inscription' element={<SignUp/>}/>
+                {/* <Route  path ='/accueil' element={<HomePage/>} /> */}
             </Routes>
         </BrowserRouter>
     </div>
 )
 }
-export default Login
+export default Pages

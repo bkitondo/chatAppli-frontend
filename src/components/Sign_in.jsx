@@ -1,13 +1,12 @@
 import Menu from "./Menu"
-import '../styles/Login.css'
+import '../styles/Pages.css'
 import {useState } from "react"
-// import axios from "axios"
 
 export default function SignIn(){
     const [id,setId] = useState("")
     const [password, setPassword] = useState("")
-          console.log(`ùùùùùùùùù ${id}`);
-          console.log(password);
+          console.log(`ùùùùùùùùù ${id}`)
+          console.log(password)
 
           function Submit(e){
                     e.preventDefault()

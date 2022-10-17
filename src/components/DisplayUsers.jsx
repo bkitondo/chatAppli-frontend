@@ -1,6 +1,6 @@
 import {Data} from '../data/data'
 import '../styles/DisplayUsers.css'
-import {RiSearchLine} from 'react-icons/ri';
+import {RiSearchLine} from 'react-icons/ri'
 import {FiMoreVertical} from 'react-icons/fi'
 import photo from '../media/profil.jpg'
 
@@ -20,7 +20,6 @@ export default function DispayUsers(){
                         <img 
                        src={photo} 
                        alt="l'utilisateur" />
-
                        <ul>
                             <li className='nom' >{user.userName}</li>
                             <li className='message' >{user.userLastName}</li>
