@@ -1,9 +1,19 @@
 import "../styles/DisplayDiscussion.css"
 import '../styles/DisplayUsers.css'
 import {AiOutlineSend} from 'react-icons/ai'
+import { useState } from "react"
 
 export default function DisplayDiscussion({recentUser}){
-        
+    const [messageSended, setMessageSended] = useState("")
+    const Message = ["salutt", "bonjour"]
+    
+    const Msg = (e)=>{
+            e.preventDefault()
+            // Message.push(messageSended)
+            console.log("Hello");
+            console.log(`message ${Message}`);
+    }
+
     return(
         <div className="discussionPage">
            <ul   className="person">
@@ -11,12 +21,19 @@ export default function DisplayDiscussion({recentUser}){
                 <li className="recentMessage">{recentUser.message}</li>
            </ul>
            <div className="allMessages">
-
+            {Message.map((message)=>{
+                <ul>
+                    <li>
+                        {message}
+                    </li>
+                </ul>
+            })}
            </div>
-           <form className="message">
-                <textarea  rows="1" className="msg"/>
-                {/* <input type="submit" className="send"  /> */}
-                <AiOutlineSend className="send" />
+           <form className="message" onSubmit={e => Msg(e)}>
+                <textarea onChange={(e)=> setMessageSended(e.target.value)} value={messageSended} rows="1" className="msg"/>
+                <button type="submit" className="btn">
+                    <AiOutlineSend className="send" />
+                </button>
            </form>
         </div>
     )
