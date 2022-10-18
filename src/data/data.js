@@ -1,4 +1,5 @@
 import profil from '../media/profil.jpg'
+
 export const Data = [
     {
         userName:"Tete",

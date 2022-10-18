@@ -1,0 +1,41 @@
+.loginPage{
+    display: flex;
+    flex-direction: row;
+    padding: 0 5%;
+}
+.item{
+    width: 50%;
+    height: auto; 
+}
+.imageLogin{
+     width: 100%;
+}
+.formulaire{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin:  20%  20% 0;
+}
+.champ{
+    outline: none;
+    padding: 5px;
+    border-style: none;
+    border-bottom: solid 1px #8b3eff ;
+    font-size: 16px;
+    margin-top:4% ;
+    width: 96%;
+}
+.bouton{
+    border-style: none;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 5%;
+    width: 100%;
+    background: #8b3eff;
+    color: #e9e8f6;
+    font-size: 16px;
+}
+.bouton:hover{
+    background:#2c73ff;
+    color: #FFF;
+}
