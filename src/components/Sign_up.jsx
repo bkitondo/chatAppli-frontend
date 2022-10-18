@@ -19,11 +19,12 @@ export default function SignUp(){
                         phone: telephone,
                         password
         })
+
         createUser.then((res) => console.log(res)).catch((err) => console.log(err));
     }
     return(
        <main className="item">
-            <form onSubmit={Submit}>
+            <form  className="formulaire" onSubmit={Submit}>
                 <input 
                         className="champ" 
                         type="text" 

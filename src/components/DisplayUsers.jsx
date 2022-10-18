@@ -4,7 +4,8 @@ import {RiSearchLine} from 'react-icons/ri'
 import {FiMoreVertical} from 'react-icons/fi'
 import photo from '../media/profil.jpg'
 
-export default function DispayUsers(){
+export default function DispayUsers({recentUser}, {setRecentUser}){
+    console.log("okokokok",recentUser);
     return(
         <div  className="usersPage">
           <div className='searchContainer' >
@@ -20,9 +21,14 @@ export default function DispayUsers(){
                         <img 
                        src={photo} 
                        alt="l'utilisateur" />
-                       <ul>
-                            <li className='nom' >{user.userName}</li>
-                            <li className='message' >{user.userLastName}</li>
+                       <ul   
+                       onClick={()=> setRecentUser({
+                    userName:user.userName,
+                    message : user.userLastName
+                   })} 
+                   >
+                            <li className='userName' >{user.userName}</li>
+                            <li className='recentMessage' >{user.userLastName}</li>
                        </ul>
                    </div>  
                 ))}
