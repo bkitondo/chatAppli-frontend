@@ -15,15 +15,16 @@ export default function SignUp(){
 
     const Submit = (e)=>{
             e.preventDefault()
-        
-        const createUser = axios.post(url,{
-                        userName: name,
-                        email,
-                        password
-        })
-
-        createUser.then(() => navigate("/"))
-        .catch((err) => console.log(err));
+        if(password === confirmPassword){
+                axios.post(url,{
+                                userName: name,
+                                email,
+                                password
+                })
+                .then(() => navigate("/"))
+                .catch((err) => console.log(err));
+        }
+        else{console.log("mot de passe different");}
     }
     return(
        <main className="item">
