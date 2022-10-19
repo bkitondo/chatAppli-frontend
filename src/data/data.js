@@ -26,7 +26,6 @@ export const Data = [
         userLastName :"sublime",
         image: {profil}
     },
-    ,
     {
         userName:"Gisapa",
         userLastName :"flerecie",
@@ -46,7 +45,6 @@ export const Data = [
         userName:"bosasele",
         userLastName :"sublime",
         image: {profil},
-        
-    }   
+    }
 ]
     

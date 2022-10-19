@@ -21,13 +21,13 @@ export default function DisplayDiscussion({recentUser}){
                 <li className="recentMessage">{recentUser.message}</li>
            </ul>
            <div className="allMessages">
-            {Message.map((message)=>{
+            {Message.map((message)=>(
                 <ul>
                     <li>
                         {message}
                     </li>
                 </ul>
-            })}
+            ))}
            </div>
            <form className="message" onSubmit={e => Msg(e)}>
                 <textarea onChange={(e)=> setMessageSended(e.target.value)} value={messageSended} rows="1" className="msg"/>

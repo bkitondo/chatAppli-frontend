@@ -2,25 +2,29 @@ import Menu from "./Menu"
 import '../styles/Pages.css'
 import {useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export default function SignUp(){
 
-    const [id, setId] = useState("")
-    const [telephone, setTelephone] = useState("")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirPassword] =useState("")
+    const navigate = useNavigate()
     const url= "http://localhost:8080/api/auth/signup"
 
     const Submit = (e)=>{
             e.preventDefault()
+            
 
         const createUser = axios.post(url,{
-                        userName: id,
-                        phone: telephone,
+                        userName: name,
+                        email,
                         password
         })
 
-        createUser.then((res) => console.log(res)).catch((err) => console.log(err));
+        createUser.then(() => navigate("/"))
+        .catch((err) => console.log(err));
     }
     return(
        <main className="item">
@@ -28,14 +32,14 @@ export default function SignUp(){
                 <input 
                         className="champ" 
                         type="text" 
-                        placeholder="Identifiant"
-                        onChange={(e)=>{setId(e.target.value)}} value={id} 
+                        placeholder="Nom"
+                        onChange={(e)=>{setName(e.target.value)}} value={name} 
                 />
                 <input 
                         className="champ" 
                         type="tel" 
-                        placeholder="Telephone" 
-                        onChange={(e)=>{setTelephone(e.target.value)}} value={telephone}
+                        placeholder="Email" 
+                        onChange={(e)=>{setEmail(e.target.value)}} value={email}
                 />
                 <input 
                         className="champ" 
@@ -46,7 +50,7 @@ export default function SignUp(){
                 <input 
                         className="champ"  
                         type="password" 
-                        placeholder="Confirmez votre mot de passe" 
+                        placeholder="Confirmez mot de passe" 
                         onChange={(e)=>{setConfirPassword(e.target.value)}} value={confirmPassword}
                 />
                 {/* <input  type="file"  /> */}
