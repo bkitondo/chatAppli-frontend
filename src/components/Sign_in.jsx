@@ -2,36 +2,50 @@ import Menu from "./Menu"
 import '../styles/Pages.css'
 import {useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
-
-export default function SignIn(){
-    const [telephone,setTelephone] = useState("")
+export default function SignIn({setToken}){
+    const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
     const url= "http://localhost:8080/api/auth/signin"
 
-          console.log(`ùùùùùùùùù ${telephone}`)
+          console.log(`ùùùùùùùùù ${email}`)
           console.log(password)
 
           function Submit(e){
                     e.preventDefault()
-                    const Connexion = axios.post(url,{
-                                    phone: telephone,
-                                    password
+                    axios.post(url,{
+                        email,
+                        password
                     })
-            
-                    Connexion.then((res) => console.log(res)).catch((err) => console.log(err));
+                    .then(data=>
+                        {
+                            const token =  data.data.token.split(" ")[1]
+                            localStorage.setItem("token", token)
+                            localStorage.setItem("userId", data.data.userId)
+                            // console.log(token)
+                            // console.log(data)
+                            // if (token === ""){
+                            //     navigate("/")
+                            // }
+                            // else{
+                                // } 
+                                navigate("/accueil")
+                                setToken(token)
+                            }
+                    )
+                    .catch((err)=>console.log(err))
                 }
-          
-
     return(
         <main className="item">
             <form className="formulaire"   onSubmit={Submit}>
                 <input  className="champ" 
                         type="tel" 
-                        placeholder="Numero de telephone" 
-                        name="telephone" 
-                        onChange={(e)=> setTelephone(e.target.value)} 
-                        value={telephone}
+                        placeholder="Email" 
+                        name="email" 
+                        onChange={(e)=> setEmail(e.target.value)} 
+                        value={email}
                         required
                 />
                 <input  className="champ" 

@@ -3,14 +3,16 @@ import Inscription from './pages/SignUp';
 import Connexion from './pages/SignIn';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// import { useState } from 'react';
 
 function App() {
+  // const [token, setToken] = useState("")
   return (
     <div>
       <BrowserRouter>
           <Routes>
-              <Route path='/' element={<Connexion/>} />
-              <Route path='/inscription' element={<Inscription/>} />
+              <Route path='/' element={<Connexion/> } />
+              <Route path='/inscription' element={<Inscription/> } />
               <Route path='/accueil' element={<HomePage/>} />
           </Routes>
       </BrowserRouter>
