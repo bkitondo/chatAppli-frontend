@@ -15,8 +15,7 @@ export default function SignUp(){
 
     const Submit = (e)=>{
             e.preventDefault()
-            
-
+        
         const createUser = axios.post(url,{
                         userName: name,
                         email,

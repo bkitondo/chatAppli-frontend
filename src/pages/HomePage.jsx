@@ -16,8 +16,6 @@ function HomePage() {
       <User /> 
       <DispayUsers  recentUser ={recentUser} setRentUser ={setRecentUser} />
       <DisplayDiscussion recentUser ={recentUser}/> 
-
-
     </div>
   );
 }
