@@ -33,6 +33,11 @@ input{
     padding: 10px 0;
     border-bottom: solid 1px #c4c4c4;    
 }
+.everyUser:hover{
+cursor: pointer;
+background: #2c73ff;
+}
+
 .AllUser{
     overflow-y: auto;
     height: 430px;

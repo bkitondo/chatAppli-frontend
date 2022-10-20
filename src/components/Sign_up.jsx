@@ -3,6 +3,7 @@ import '../styles/Pages.css'
 import {useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { signUpRoute } from "../utils/url"
 
 export default function SignUp(){
 
@@ -11,12 +12,11 @@ export default function SignUp(){
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirPassword] =useState("")
     const navigate = useNavigate()
-    const url= "http://localhost:8080/api/auth/signup"
 
     const Submit = (e)=>{
             e.preventDefault()
         if(password === confirmPassword){
-                axios.post(url,{
+                axios.post(signUpRoute,{
                                 userName: name,
                                 email,
                                 password

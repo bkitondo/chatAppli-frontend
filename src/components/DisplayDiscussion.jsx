@@ -2,13 +2,22 @@ import "../styles/DisplayDiscussion.css"
 import '../styles/DisplayUsers.css'
 import {AiOutlineSend} from 'react-icons/ai'
 import { useState } from "react"
+import axios from "axios"
+import { addMessageRoute} from '../utils/url'
+
 
 export default function DisplayDiscussion({recentUser}){
     const [messageSended, setMessageSended] = useState("")
     const Message = ["salutt", "bonjour"]
+    const currentUserId = localStorage.getItem("userId") 
+    // console.log(`le curentUserId ${currentUserId}`);
     
-    const Msg = (e)=>{
+    const sendMsg = (e)=>{
             e.preventDefault()
+            axios.post(addMessageRoute,{
+                    message : messageSended,
+                    from : currentUserId
+            })
             // Message.push(messageSended)
             // console.log("Hello");
             console.log(`message ${messageSended}`);
@@ -29,7 +38,7 @@ export default function DisplayDiscussion({recentUser}){
                 </ul>
             ))}
            </div>
-           <form className="message" onSubmit={e => Msg(e)}>
+           <form className="message" onSubmit={e => sendMsg(e)}>
                 <textarea onChange={(e)=> setMessageSended(e.target.value)} value={messageSended} rows="1" className="msg"/>
                 <button type="submit" className="btn">
                     <AiOutlineSend className="send" />

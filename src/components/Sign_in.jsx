@@ -3,26 +3,27 @@ import '../styles/Pages.css'
 import {useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { signInRoute } from "../utils/url"
 
-export default function SignIn({setToken}){
+export default function SignIn(){
+    
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
-    const url= "http://localhost:8080/api/auth/signin"
-
+    
           function Submit(e){
                     e.preventDefault()
-                    axios.post(url,{
+                    axios.post(signInRoute,{
                         email,
                         password
                     })
-                    .then(data=>
+                    .then(user=>
                         {
-                            const token =  data.data.token.split(" ")[1]
+                            const token =  user.data.token.split(" ")[1]
                             localStorage.setItem("token", token)
-                            localStorage.setItem("userId", data.data.userId)
-                                navigate("/accueil")
-                                setToken(token)
+                            localStorage.setItem("userId", user.data.userId)
+                            localStorage.setItem("userName", user.data.userName)
+                            navigate("/accueil")
                             }
                     )
                     .catch((err)=>console.log(err))

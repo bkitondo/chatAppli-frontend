@@ -1,21 +1,43 @@
-// import {Data} from '../data/data'
 import '../styles/DisplayUsers.css'
 import {RiSearchLine} from 'react-icons/ri'
 import {FiMoreVertical} from 'react-icons/fi'
 import photo from '../media/profil.jpg'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-const url = "http://localhost:8080/api/auth/signup"
-
+import { useEffect, useRef, useState } from 'react'
+import { signUpRoute, serverRoute} from '../utils/url'
+// import {io} from "socket.io-client"
+// import { Socket } from 'socket.io'
+// import { useNavigate } from 'react-router-dom'
 
 export default function DispayUsers({recentUser}, {setRecentUser}){
-    const [users, setUsers] = useState([])
+    // const socket = useRef()
+    // const navigate = useNavigate()
+    const [contacts, setContacts] = useState([])
+    const [currentUser, setCurrentUser] = useState(undefined)
+    const [online, setOnline] = useState(false)
+    const [currentChat, setCurrentChat] = useState(undefined)
+
+    const token = localStorage.getItem("token")
 
     useEffect(()=>{
-        axios.get(url)
+        setCurrentUser(localStorage.getItem("userName"))
+        !currentUser ? setOnline(true) : setOnline(false)
+    }, [token]);
+    console.log(`${currentUser} voici le user en ligne`);
+    console.log(`${online} voici le status en ligne`);
+
+    // useEffect(()=>{
+    //     if(currentUser){
+    //         socket.current = io(serverRoute)
+    //         socket.current.emit("utilisateur ajouté")
+    //     }
+    // },[currentUser])
+    
+    useEffect(()=>{
+        axios.get(signUpRoute)
         .then((response)=>{
-            setUsers(response.data)
-            console.log("users",response.data);
+            setContacts(response.data)
+            console.log(" les contacts",response.data);
         })
         .catch((err)=>{
             console.log(err);
@@ -32,7 +54,7 @@ export default function DispayUsers({recentUser}, {setRecentUser}){
           <div className='containerAllUser'>
                 <h3>Recent</h3>
             <div className='AllUser' >
-                {users.map((user, index)=>(
+                {contacts.map((user, index)=>(
                    <div  className='everyUser' key = {index} >
                         <img 
                        src={photo} 
