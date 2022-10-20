@@ -11,7 +11,6 @@ export default function User(){
         localStorage.removeItem("token")
         localStorage.removeItem("userId")
         nav('/')
-
       }
     return(
         <div  className="userPage">
