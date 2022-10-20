@@ -10,8 +10,8 @@ export default function DisplayDiscussion({recentUser}){
     const Msg = (e)=>{
             e.preventDefault()
             // Message.push(messageSended)
-            console.log("Hello");
-            console.log(`message ${Message}`);
+            // console.log("Hello");
+            console.log(`message ${messageSended}`);
     }
 
     return(
@@ -24,7 +24,7 @@ export default function DisplayDiscussion({recentUser}){
             {Message.map((message)=>(
                 <ul>
                     <li>
-                        {message}
+                        {/* {message} */}
                     </li>
                 </ul>
             ))}

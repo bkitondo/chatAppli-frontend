@@ -10,9 +10,6 @@ export default function SignIn({setToken}){
     const navigate = useNavigate()
     const url= "http://localhost:8080/api/auth/signin"
 
-          console.log(`ùùùùùùùùù ${email}`)
-          console.log(password)
-
           function Submit(e){
                     e.preventDefault()
                     axios.post(url,{
@@ -24,13 +21,6 @@ export default function SignIn({setToken}){
                             const token =  data.data.token.split(" ")[1]
                             localStorage.setItem("token", token)
                             localStorage.setItem("userId", data.data.userId)
-                            // console.log(token)
-                            // console.log(data)
-                            // if (token === ""){
-                            //     navigate("/")
-                            // }
-                            // else{
-                                // } 
                                 navigate("/accueil")
                                 setToken(token)
                             }

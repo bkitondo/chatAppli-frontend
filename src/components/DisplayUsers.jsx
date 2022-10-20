@@ -14,16 +14,13 @@ export default function DispayUsers({recentUser}, {setRecentUser}){
     useEffect(()=>{
         axios.get(url)
         .then((response)=>{
-            const dat = JSON.stringify(response.data)
-            setUsers(dat)
-            console.log(`les users ${dat}`);
+            setUsers(response.data)
+            console.log("users",response.data);
         })
         .catch((err)=>{
             console.log(err);
         })
     },[])
-
-    console.log("okokokok",users);
 
     return(
         <div  className="usersPage">
