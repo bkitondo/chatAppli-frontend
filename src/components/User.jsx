@@ -8,8 +8,7 @@ export default function User(){
     const nav = useNavigate()
 
     function Logout() {
-        localStorage.removeItem("token")
-        localStorage.removeItem("userId")
+        localStorage.clear()
         nav('/')
       }
     return(
