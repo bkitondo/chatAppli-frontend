@@ -5,17 +5,17 @@ import "../styles/HomePage.css"
 import { useState } from 'react';
 
 function HomePage() {
-  const [recentUser, setRecentUser] = useState({
-    userName :"bleudy",
-    message :"kitondo"
+  const [currentChat, setCurrentChat] = useState({
+    userName :"",
+    userId :""
   })
-  console.log(` mmmmmm ${recentUser.message}`);
+  console.log(` currentUserId ${currentChat.userId}`);
 
   return (
     <div className='HomePage' >
       <User /> 
-      <DispayUsers  recentUser ={recentUser} setRentUser ={setRecentUser} />
-      <DisplayDiscussion recentUser ={recentUser}/> 
+      <DispayUsers  setCurrentChat ={setCurrentChat} />
+      <DisplayDiscussion currentChat ={currentChat} /> 
     </div>
   );
 }
