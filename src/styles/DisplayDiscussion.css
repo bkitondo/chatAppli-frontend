@@ -5,7 +5,7 @@ background:#fff;
 border-radius: 20px;
 box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
 }
-.msg
+.fieldMsg
 {
     color: #000;
     font-size: 12px;
@@ -14,6 +14,8 @@ box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
     border-style: none; resize: none;
     outline: none;
     padding: 3%;
+    width: 80%;
+    margin-top: 5%;
 }
 .message{
     display: flex;
@@ -40,10 +42,21 @@ box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
     
 }
 .msg{
-    width: 80%;
     color: #000;
+    font-size: 12px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    padding: 3%;
+    width: 50%;
     margin-top: 5%;
+    height: auto;
+    /* align-self: flex-end; */
 }
 .allMessages{
     height: 400px;
+    overflow-y: scroll;
+}
+
+.userNameWelcome{
+    align-self: center;    
 }
