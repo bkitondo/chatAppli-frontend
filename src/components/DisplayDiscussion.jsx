@@ -1,12 +1,13 @@
-import "../styles/DisplayDiscussion.css"
+import '../styles/DisplayDiscussion.css'
 import '../styles/DisplayUsers.css'
-import Welcome from "./welcome"
-import {AiOutlineSend} from 'react-icons/ai'
-import { useState,useEffect } from "react"
-import axios from "axios"
-import { addMessageRoute, getMessage} from '../utils/url'
+import Welcome from './welcome'
+import { AiOutlineSend } from 'react-icons/ai'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { addMessageRoute, getMessage } from '../utils/url'
+import photo from '../media/profil.jpg'
 
-export default function DisplayDiscussion({currentChat}){
+export default function DisplayDiscussion ({ currentChat }) {
     const [messageSended, setMessageSended] = useState(""),
           [messages, setMessages] = useState([]),
           currentUserId = localStorage.getItem("userId"),
@@ -77,19 +78,28 @@ export default function DisplayDiscussion({currentChat}){
 
     return( currentChat.userId === "" ? <Welcome /> :
         <div className="discussionPage">
-           <ul   className="person">
-                <li className="userName" >{currentChat.userName}</li>
-                <li className="recentMessage">{currentChat.message}</li>
-           </ul>
-           <div className="allMessages">
-            {messages.map((message)=>(
-                    <ul>
-                    <li  className="msg">
-                        {message.message}
-                    </li>
-                    <li>{message.createdAt.split("T")[0]} {message.createdAt.split("T")[1].split('.')[0]}</li>
+            <div className="online">
+                <img src={photo}  className alt="" />
+                <ul>
+                    <li className="userName" >{currentChat.userName}</li>
+                    <li className="recentMessage">{currentChat.userId}</li>
                 </ul>
-            ))}
+                <div></div>
+            </div>
+          
+           <div className="allMessages">
+            {/* {messages.map((message)=>( */}
+                    <ul className='containerMessage' >
+                    <li  className="msgSended">
+                        {/* {message.message} */}
+                        salut bro
+                    </li>
+                    <li className='msgReceved'>
+                        {/* {message.createdAt.split("T")[0]} {message.createdAt.split("T")[1].split('.')[0]} */}
+                        oui salut
+                    </li>
+                </ul>
+             {/* ))} */}
            </div>
            <form className="message" onSubmit={sendMsg}>
                 <textarea onChange={(e)=> setMessageSended(e.target.value)} value={messageSended} rows="1" className="fieldMsg"/>
