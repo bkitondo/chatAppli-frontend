@@ -1,22 +1,21 @@
-import HomePage from './pages/HomePage';
-import Inscription from './pages/SignUp';
-import Connexion from './pages/SignIn';
+import React from 'react'
+import HomePage from './pages/HomePage'
+import Inscription from './pages/SignUp'
+import Connexion from './pages/SignIn'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-// import { useState } from 'react';
 
 function App() {
-  // const [token, setToken] = useState("")
   return (
     <div>
       <BrowserRouter>
-          <Routes>
-              <Route path='/' element={<Connexion/> } />
-              <Route path='/inscription' element={<Inscription/> } />
-              <Route path='/accueil' element={<HomePage/>} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Connexion />} />
+          <Route path="/inscription" element={<Inscription />} />
+          <Route path="/accueil" element={<HomePage />} />
+        </Routes>
       </BrowserRouter>
     </div>
-  );
+  )
 }
-export default App;
+export default App

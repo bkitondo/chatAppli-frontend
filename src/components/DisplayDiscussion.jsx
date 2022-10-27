@@ -1,20 +1,20 @@
-import '../styles/DisplayDiscussion.css'
-import '../styles/DisplayUsers.css'
-import Welcome from './welcome'
-import { AiOutlineSend } from 'react-icons/ai'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { addMessageRoute, getMessage } from '../utils/url'
-import photo from '../media/profil.jpg'
+import "../styles/DisplayDiscussion.css"
+import "../styles/DisplayUsers.css"
+import Welcome from "./welcome"
+import { AiOutlineSend } from "react-icons/ai"
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { addMessageRoute, getMessage } from "../utils/url"
+import photo from "../media/profil.jpg"
 
-export default function DisplayDiscussion ({ currentChat }) {
-    const [messageSended, setMessageSended] = useState(""),
-          [messages, setMessages] = useState([]),
-          currentUserId = localStorage.getItem("userId"),
-          token = localStorage.getItem("token")
-    
-    const sendMsg = (e)=>{
-        e.preventDefault()
+export default function DisplayDiscussion({ currentChat }) {
+  const [messageSended, setMessageSended] = useState(""),
+    [messages, setMessages] = useState([]),
+    currentUserId = localStorage.getItem("userId"),
+    token = localStorage.getItem("token")
+
+  const sendMsg = (e) => {
+    e.preventDefault()
         {(messageSended.length < 3) ? alert('message non valide '):
             axios.post(addMessageRoute,
                 {
