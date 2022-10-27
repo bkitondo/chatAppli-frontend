@@ -16,11 +16,12 @@ export default function DisplayDiscussion ({ currentChat }) {
     const sendMsg = (e)=>{
         e.preventDefault()
         {(messageSended.length < 3) ? alert('message non valide '):
-            axios.post(addMessageRoute,{
+            axios.post(addMessageRoute,
+                {
                     message : messageSended,
                     from : currentUserId,
                     to : currentChat.userId
-            })
+                })
             .then(() => {
                 setMessageSended("")
                 console.log("message envoyé avec succes");})
