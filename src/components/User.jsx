@@ -21,7 +21,8 @@ export default function User(){
                 <div className="barjaune">
                 </div>
             </div>
-            <button className="logout" onClick={Logout}><RiLogoutBoxRLine /></button>
+            <button className="logout" 
+                    onClick={Logout}><RiLogoutBoxRLine /></button>
         </div>
     )
 }

@@ -5,11 +5,8 @@ import photo from '../media/profil.jpg'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { signUpRoute} from '../utils/url'
-// import {io} from "socket.io-client"
-// import { Socket } from 'socket.io'
 
 export default function DispayUsers({setCurrentChat}){
-    // const socket = useRef()
     const [contacts, setContacts] = useState([]),
           [currentUser, setCurrentUser] = useState(""),
           [online, setOnline] = useState(false)
@@ -21,15 +18,6 @@ export default function DispayUsers({setCurrentChat}){
         setCurrentUser(localStorage.getItem("userName"))
         !currentUser ? setOnline(true) : setOnline(false)
     }, [token]);
-    // console.log(`${currentUser} voici le user en ligne`);
-    // console.log(`${online} voici le status en ligne`);
-
-    // useEffect(()=>{
-    //     if(currentUser){
-    //         socket.current = io(serverRoute)
-    //         socket.current.emit("utilisateur ajouté")
-    //     }
-    // },[currentUser])
     
     useEffect(()=>{
         axios.get(`${signUpRoute}/${currentUserId}`)
@@ -64,7 +52,6 @@ export default function DispayUsers({setCurrentChat}){
                        alt="l'utilisateur" />
                        <ul>
                             <li className='userName' >{contact.userName}</li>
-                            {/* <li className='recentMessage' >{contact._id}</li> */}
                        </ul>
                    </div>  
                 ))}

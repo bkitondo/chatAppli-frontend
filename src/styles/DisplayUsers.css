@@ -7,10 +7,10 @@
 .searchContainer{
     display: flex;
     flex-direction: row;
-border-radius: 20px;
-background: #fff;
-padding: 15px;
-box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
+    border-radius: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
 }
 input{
     border-style: none;
@@ -18,7 +18,7 @@ input{
     font-size: 16px;
     width: 80%;
     outline: none;
-    color: #c4c4c4;
+    color: black
 }
 .more{
     font-size: 30px;
@@ -61,6 +61,6 @@ margin-top: 20px;
     font-weight: bold;
     padding-bottom: 3px;
 }
-.reccentMessage{
+.status{
     color:#c4c4c4 ;
 }
