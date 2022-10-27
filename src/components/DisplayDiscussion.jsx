@@ -12,27 +12,10 @@ export default function DisplayDiscussion ({ currentChat }) {
           [messages, setMessages] = useState([]),
           currentUserId = localStorage.getItem("userId"),
           token = localStorage.getItem("token")
-        //   scrollRef = useRef 
-
-
-        //   useEffect(() => {
-
-        //     const fetchData = async () => {
-        //       if(currentChat){
-        //         const response = await axios.get(getAllMessagesRoute, {
-        //         //   from: currentUserId,
-        //         //   to: currentChat.userId,
-        //         });
-        //         console.log(`okokokoksshqkhd ${response.data}`);
-        //         setMessages(response.data);
-        //       }
-        //     }
-        //     fetchData();
-        //   }, [token]);
     
     const sendMsg = (e)=>{
         e.preventDefault()
-        {(messageSended.length < 3) ? alert('message non valide'):
+        {(messageSended.length < 3) ? alert('message non valide '):
             axios.post(addMessageRoute,{
                     message : messageSended,
                     from : currentUserId,
@@ -41,40 +24,21 @@ export default function DisplayDiscussion ({ currentChat }) {
             .then(() => {
                 setMessageSended("")
                 console.log("message envoyé avec succes");})
-            .catch((err) => console.log(err))
-           
-            // const Msgs = [...messages]
-            // Msgs.push({
-            //     fromSelf : true,
-            //     message : messageSended
-            // })
-            
+            .catch((err) => console.log(err))            
         }
-
-            // console.log(" verifions juste",messages[0]);
     }
+    const from = currentUserId
+    const to = currentChat.userId
+
     useEffect(()=>{
-        axios.get(`${getMessage}/${currentUserId}`)
+        axios.get(`${getMessage}/${from}/${to}`)
         .then((mes)=>{
-            setMessages(mes.data)
-            // console.log(mes.data ,"les messages  reçus")
+            setMessages(mes.data.messages)
         })
         .catch(err =>console.error(err))
-    },[token])
+    },[token, currentChat])
 
-// const [us ,setUs] = useState([])
-
-    console.log(messages ,"les messages caveeeee  reçus")
-    // messages.map((send)=>( 
-    //     console.log(send.users, 'users ')  
-    // ))
-    const currentChatUserId = currentChat.userId
-    const conversation = { currentUserId, currentChatUserId}
-    console.log(`voici le user recuperer ${conversation.currentChatUserId}`);
-    
-
-
-    
+    console.log(messages ,"les messages reçus par conversation")
 
     return( currentChat.userId === "" ? <Welcome /> :
         <div className="discussionPage">
@@ -82,27 +46,28 @@ export default function DisplayDiscussion ({ currentChat }) {
                 <img src={photo}  className alt="" />
                 <ul>
                     <li className="userName" >{currentChat.userName}</li>
-                    <li className="recentMessage">{currentChat.userId}</li>
+                    <li className="status">online</li>
                 </ul>
                 <div></div>
             </div>
           
            <div className="allMessages">
-            {/* {messages.map((message)=>( */}
-                    <ul className='containerMessage' >
-                    <li  className="msgSended">
-                        {/* {message.message} */}
-                        salut bro
-                    </li>
-                    <li className='msgReceved'>
-                        {/* {message.createdAt.split("T")[0]} {message.createdAt.split("T")[1].split('.')[0]} */}
-                        oui salut
-                    </li>
-                </ul>
-             {/* ))} */}
+            <ul className='containerMessage'>
+                {messages ?
+                    ( messages.length > 0 ?
+                        messages.map((message) => 
+                        <li className={message.from === from ? 'msgSended' 
+                        : 'msgReceved'}>{message.message}</li>)
+                    :null)
+                :null
+                }
+            </ul>             
            </div>
            <form className="message" onSubmit={sendMsg}>
-                <textarea onChange={(e)=> setMessageSended(e.target.value)} value={messageSended} rows="1" className="fieldMsg"/>
+                <textarea onChange={(e)=> setMessageSended(e.target.value)} 
+                          value={messageSended} rows="1" 
+                          className="fieldMsg"
+                />
                 <button type="submit" className="btn">
                     <AiOutlineSend className="send" />
                 </button>
