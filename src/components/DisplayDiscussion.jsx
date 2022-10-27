@@ -52,16 +52,25 @@ export default function DisplayDiscussion ({ currentChat }) {
             </div>
           
            <div className="allMessages">
-            <ul className='containerMessage'>
-                {messages ?
+            <div className='containerMessage'>
+                {
+                messages ?
                     ( messages.length > 0 ?
                         messages.map((message) => 
-                        <li className={message.from === from ? 'msgSended' 
-                        : 'msgReceved'}>{message.message}</li>)
+                        <ul className={message.from === from ? 'msgSended' 
+                        : 'msgReceved'}>
+                            <li>{message.message}</li>
+                            <li className='date'>{
+                                `${message.createdAt.split('T')[0]}
+                                ${message.createdAt.split('T')[1].split('.')[0]}
+                                `}
+                            </li>
+                        </ul>
+                        )
                     :null)
                 :null
                 }
-            </ul>             
+            </div>             
            </div>
            <form className="message" onSubmit={sendMsg}>
                 <textarea onChange={(e)=> setMessageSended(e.target.value)} 
