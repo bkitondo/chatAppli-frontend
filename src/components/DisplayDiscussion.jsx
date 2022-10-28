@@ -6,9 +6,12 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { addMessageRoute, getMessage } from "../utils/url"
 import photo from "../media/profil.jpg"
+export default function DisplayDiscussion({ currentChat}) {
 
-export default function DisplayDiscussion({ currentChat }) {
-  const [messageSended, setMessageSended] = useState(""),
+  const [messageSended, setMessageSended] = useState({
+    emoji:"",
+    text:""
+  }),
     [messages, setMessages] = useState([]),
     currentUserId = localStorage.getItem("userId"),
     token = localStorage.getItem("token")
@@ -18,13 +21,16 @@ export default function DisplayDiscussion({ currentChat }) {
         {(messageSended.length < 3) ? alert('message non valide '):
             axios.post(addMessageRoute,
                 {
-                    message : messageSended,
+                    message : `${messageSended.text}`,
                     from : currentUserId,
                     to : currentChat.userId
                 })
             .then(() => {
-                setMessageSended("")
-                console.log("message envoyé avec succes");})
+                setMessageSended({
+                    emoji:"",
+                    text :""
+                })
+                })
             .catch((err) => console.log(err))            
         }
     }
@@ -50,33 +56,29 @@ export default function DisplayDiscussion({ currentChat }) {
                     <li className="status">online</li>
                 </ul>
                 <div></div>
+                <div></div>
+            </div>
+
+            <div className="allMessages">                
+                {   messages.map((message) => (
+                        <div className={message.from === currentUserId ? "msgSended own" : "msgSended" }>
+                            <div className="parentMsg">
+                                <p className="messageText">{message.message}</p>
+                            </div>
+                            <div className="date">
+                                {message.createdAt.split('T')[0]}, 
+                                {message.createdAt.split('T')[1].split('.')[0]}
+                            </div>
+                        </div>
+                    ))}
             </div>
           
-           <div className="allMessages">
-            <div className='containerMessage'>
-                {
-                messages ?
-                    ( messages.length > 0 ?
-                        messages.map((message) => 
-                        <ul className={message.from === from ? 'msgSended' 
-                        : 'msgReceved'}>
-                            <li>{message.message}</li>
-                            <li className='date'>{
-                                `${message.createdAt.split('T')[0]}
-                                ${message.createdAt.split('T')[1].split('.')[0]}
-                                `}
-                            </li>
-                        </ul>
-                        )
-                    :null)
-                :null
-                }
-            </div>             
-           </div>
            <form className="message" onSubmit={sendMsg}>
-                <textarea onChange={(e)=> setMessageSended(e.target.value)} 
-                          value={messageSended} rows="1" 
-                          className="fieldMsg"
+                <textarea  placeholder="write your message here"
+                    onChange={(e)=> setMessageSended({
+                    text : e.target.value})} 
+                    value={messageSended.text} rows="1" 
+                    className="fieldMsg"
                 />
                 <button type="submit" className="btn">
                     <AiOutlineSend className="send" />

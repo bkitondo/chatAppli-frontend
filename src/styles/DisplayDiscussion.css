@@ -12,9 +12,9 @@ box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
     border-radius: 10px;
     border-style: none; resize: none;
     outline: none;
-    padding: 3%;
+    padding: 2%;
     width: 80%;
-    margin-top: 3%;
+    margin-top: 2%;
 }
 .message{
     display: flex;
@@ -29,43 +29,20 @@ box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
     font-size: 20px;
     color:#fff ;
     border-radius: 10px;
-    padding: 5px;
+    padding: 2%;
 }
 .btn{
     background: #1966ff;
     border-style: none;
     border-radius: 10px;
-    margin-top: 5%; 
-}
-.msgSended{
-    color: #fff;
-    font-size: 14px;
-    background: #1966ff;
-    border-radius: 10px 10px 0px 10px;
-    padding: 2%;
-    margin-top: 3%;
-    height: auto;
-    align-self: flex-end;
-    max-width: 50%;
-}
-.msgReceved{
-    color: #000;
-    font-size: 14px;
-    background: #e0e0e0;
-    border-radius: 10px 10px 10px 0;
-    padding: 2% 2% 1% 2%;
-    margin-top: 3%;
-    height: auto;
-    align-self: flex-start;
-    max-width: 50%;
-    margin-left: 5%;
+    margin-top: 2%; ;
+    width: 10%;
 }
 .allMessages{
     height: 380px;
     overflow-y: scroll;
-    margin: 0px;
-    padding: 1% 10% 1% 0;
-    width: 95%;
+    margin: 0 5%;
+    width: 90%;
 }
 .userNameWelcome{
     text-align: center; 
@@ -84,11 +61,31 @@ box-shadow: 0px -3px 4px  rgb(0, 0, 0, 0.25) inset;
     padding: 0 30px;
     font-size: 16px;
 }
-.containerMessage{
+.msgSended{
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
+    margin-top: 15px;
 }
-.date{
-    font-size: 10px;
-    margin-top: 15%;
+.parentMsg{
+    display: flex;
+}
+.messageText{
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 10px 10px 10px 0;
+    color:#000;
+    max-width: 300px;
+    font-size: 14px;
+}
+.date {
+    font-size: 12px;
+    margin-top: -12px;
+}
+.msgSended.own{
+    align-items: flex-end;
+}
+.msgSended.own .messageText{
+      background-color: #1966ff;
+      color:#fff;
+      border-radius: 10px 10px 0 10px;
 }
