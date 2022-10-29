@@ -24,7 +24,7 @@ export default function SignUp(){
                 .then(() => navigate("/"))
                 .catch((err) => console.log(err));
         }
-        else{console.log("mot de passe different");}
+        else{alert("mot de passe different");}
     }
     return(
        <main className="item">

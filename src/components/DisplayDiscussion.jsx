@@ -6,17 +6,17 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { addMessageRoute, getMessage } from "../utils/url"
 import photo from "../media/profil.jpg"
-export default function DisplayDiscussion({ currentChat}) {
 
+export default function DisplayDiscussion({ currentChat }) {
   const [messageSended, setMessageSended] = useState({
-    emoji:"",
-    text:""
-  }),
-    [messages, setMessages] = useState([]),
-    currentUserId = localStorage.getItem("userId"),
-    token = localStorage.getItem("token")
+    emoji: "",
+    text: "",
+  })
+  const [messages, setMessages] = useState([])
+  const currentUserId = localStorage.getItem("userId")
+  // token = localStorage.getItem("token")
 
-  const sendMsg = (e) => {
+  const sendMsg = e => {
     e.preventDefault()
         {(messageSended.length < 3) ? alert('message non valide '):
             axios.post(addMessageRoute,
@@ -43,7 +43,7 @@ export default function DisplayDiscussion({ currentChat}) {
             setMessages(mes.data.messages)
         })
         .catch(err =>console.error(err))
-    },[token, currentChat])
+    },[currentChat, messageSended.text])
 
     console.log(messages ,"les messages reçus par conversation")
 
