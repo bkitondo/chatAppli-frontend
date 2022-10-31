@@ -7,20 +7,26 @@ import axios from "axios"
 import { addMessageRoute, getMessage } from "../utils/url"
 import photo from "../media/profil.jpg"
 
+import io  from "socket.io-client" 
+const socket = io.connect("http://localhost:8080")
+
 export default function DisplayDiscussion({ currentChat }) {
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
   })
   const [messages, setMessages] = useState([])
-  const currentUserId = localStorage.getItem("userId")
-  // token = localStorage.getItem("token")
+  const currentUserId = localStorage.getItem("userId"),
+  conversationId = localStorage.getItem("conversation")
 
   const sendMsg = e => {
     e.preventDefault()
+    socket.emit("send_message",messageSended)
+
         {(messageSended.length < 3) ? alert('message non valide '):
             axios.post(addMessageRoute,
-                {
+                {   
+                    conversationId,
                     message : `${messageSended.text}`,
                     from : currentUserId,
                     to : currentChat.userId
@@ -34,18 +40,29 @@ export default function DisplayDiscussion({ currentChat }) {
             .catch((err) => console.log(err))            
         }
     }
-    const from = currentUserId
-    const to = currentChat.userId
+    // const from = currentUserId
+    // const to = currentChat.userId
 
     useEffect(()=>{
-        axios.get(`${getMessage}/${from}/${to}`)
+        console.log("ensemble");
+        socket.on("receive_message", (data)=>{
+            alert(`receive_message ${data.text}`);
+        })
+    },[socket])
+
+
+    useEffect(()=>{
+        // axios.get(`${getMessage}/${from}/${to}`)
+        console.log(`conversationId ${conversationId}`);
+        axios.get(`${getMessage}/${conversationId}`)
         .then((mes)=>{
-            setMessages(mes.data.messages)
+            setMessages(mes.data)
+            console.log(mes.data, 'ffffffffffff');
         })
         .catch(err =>console.error(err))
-    },[currentChat, messageSended.text])
+    },[currentChat])
 
-    console.log(messages ,"les messages reçus par conversation")
+    // console.log(messages ,"les messages reçus par conversation")
 
     return( currentChat.userId === "" ? <Welcome /> :
         <div className="discussionPage">

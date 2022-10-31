@@ -4,9 +4,9 @@ import {FiMoreVertical} from 'react-icons/fi'
 import photo from '../media/profil.jpg'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { signUpRoute} from '../utils/url'
+import { signUpRoute, createOrFindConversation} from '../utils/url'
 
-export default function DispayUsers({setCurrentChat}){
+export default function DispayUsers({setCurrentChat, currentChat}){
     const [contacts, setContacts] = useState([]),
           [currentUser, setCurrentUser] = useState(""),
           [online, setOnline] = useState(false)
@@ -29,6 +29,20 @@ export default function DispayUsers({setCurrentChat}){
             console.log(err);
         })
     },[token])
+
+
+    useEffect(()=>{
+        // console.log('dmcklqclqmcqmùlxmù');
+
+console.log(`from ${currentUserId} to ${currentChat.userId}`);
+
+            axios.get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
+            .then((conv)=>{
+                localStorage.setItem("conversation", conv.data.conversation._id)
+            })
+            .catch((err) => { throw err})
+    },[currentChat.userId, currentUserId])
+    
 
     return(
         <div  className="usersPage">

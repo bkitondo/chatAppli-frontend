@@ -14,7 +14,7 @@ function HomePage() {
   return (
     <div className='HomePage' >
       <User /> 
-      <DispayUsers  setCurrentChat ={setCurrentChat} />
+      <DispayUsers  setCurrentChat ={setCurrentChat} currentChat ={currentChat} />
       <DisplayDiscussion currentChat ={currentChat} /> 
     </div>
   );
