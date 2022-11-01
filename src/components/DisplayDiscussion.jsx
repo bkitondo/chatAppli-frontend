@@ -7,23 +7,21 @@ import axios from "axios"
 import { addMessageRoute, getMessage } from "../utils/url"
 import photo from "../media/profil.jpg"
 
-import io  from "socket.io-client" 
-const socket = io.connect("http://localhost:8080")
+// import io from "socket.io-client"
+// const socket = io.connect("http://localhost:8080")
 
-export default function DisplayDiscussion({ currentChat }) {
+export default function DisplayDiscussion({ currentChat, conversationId}) {
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
   })
   const [messages, setMessages] = useState([])
-  const currentUserId = localStorage.getItem("userId"),
-  conversationId = localStorage.getItem("conversation")
+  const currentUserId = localStorage.getItem("userId")
 
   const sendMsg = e => {
     e.preventDefault()
-    socket.emit("send_message",messageSended)
-
-        {(messageSended.length < 3) ? alert('message non valide '):
+    // socket.emit("send_message", messageSended)
+    {(messageSended.length < 3) ? alert('message non valide '):
             axios.post(addMessageRoute,
                 {   
                     conversationId,
@@ -43,12 +41,12 @@ export default function DisplayDiscussion({ currentChat }) {
     // const from = currentUserId
     // const to = currentChat.userId
 
-    useEffect(()=>{
-        console.log("ensemble");
-        socket.on("receive_message", (data)=>{
-            alert(`receive_message ${data.text}`);
-        })
-    },[socket])
+    // useEffect(()=>{
+    //     console.log("ensemble");
+    //     socket.on("receive_message", (data)=>{
+    //         alert(`receive_message ${data.text}`);
+    //     })
+    // },[socket])
 
 
     useEffect(()=>{
@@ -60,7 +58,7 @@ export default function DisplayDiscussion({ currentChat }) {
             console.log(mes.data, 'ffffffffffff');
         })
         .catch(err =>console.error(err))
-    },[currentChat])
+    },[conversationId, messageSended])
 
     // console.log(messages ,"les messages reçus par conversation")
 

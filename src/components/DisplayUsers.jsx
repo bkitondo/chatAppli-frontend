@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { signUpRoute, createOrFindConversation} from '../utils/url'
 
-export default function DispayUsers({setCurrentChat, currentChat}){
+export default function DispayUsers({setCurrentChat, currentChat,setConversationId }){
     const [contacts, setContacts] = useState([]),
           [currentUser, setCurrentUser] = useState(""),
           [online, setOnline] = useState(false)
@@ -38,7 +38,7 @@ console.log(`from ${currentUserId} to ${currentChat.userId}`);
 
             axios.get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
             .then((conv)=>{
-                localStorage.setItem("conversation", conv.data.conversation._id)
+                setConversationId(conv.data.conversation._id)
             })
             .catch((err) => { throw err})
     },[currentChat.userId, currentUserId])
