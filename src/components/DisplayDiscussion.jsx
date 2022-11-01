@@ -48,19 +48,14 @@ export default function DisplayDiscussion({ currentChat, conversationId}) {
     //     })
     // },[socket])
 
-
     useEffect(()=>{
         // axios.get(`${getMessage}/${from}/${to}`)
-        console.log(`conversationId ${conversationId}`);
         axios.get(`${getMessage}/${conversationId}`)
         .then((mes)=>{
             setMessages(mes.data)
-            console.log(mes.data, 'ffffffffffff');
         })
         .catch(err =>console.error(err))
     },[conversationId, messageSended])
-
-    // console.log(messages ,"les messages reçus par conversation")
 
     return( currentChat.userId === "" ? <Welcome /> :
         <div className="discussionPage">
