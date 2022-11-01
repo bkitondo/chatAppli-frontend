@@ -9,13 +9,17 @@ function HomePage() {
     userName :"",
     userId :""
   })
+  const [conversationId,setConversationId] = useState("")
+  console.log(`new convId ${conversationId}`);
   console.log(` currentUserId ${currentChat.userId}`);
 
   return (
     <div className='HomePage' >
       <User /> 
-      <DispayUsers  setCurrentChat ={setCurrentChat} />
-      <DisplayDiscussion currentChat ={currentChat} /> 
+      <DispayUsers  setCurrentChat ={setCurrentChat} 
+         currentChat ={currentChat} setConversationId={setConversationId}
+      />
+      <DisplayDiscussion currentChat ={currentChat}  conversationId={conversationId} /> 
     </div>
   );
 }

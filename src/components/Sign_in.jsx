@@ -31,6 +31,7 @@ export default function SignIn(){
     return(
         <main className="item">
             <form className="formulaire"   onSubmit={Submit}>
+            <p style={{ textAlign : "center", color:"#8b3eff"}}>Bk Messenger</p>
                 <input  className="champ" 
                         type="tel" 
                         placeholder="Email" 

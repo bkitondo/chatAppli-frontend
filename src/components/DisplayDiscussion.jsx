@@ -1,44 +1,66 @@
-import '../styles/DisplayDiscussion.css'
-import '../styles/DisplayUsers.css'
-import Welcome from './welcome'
-import { AiOutlineSend } from 'react-icons/ai'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { addMessageRoute, getMessage } from '../utils/url'
-import photo from '../media/profil.jpg'
+import "../styles/DisplayDiscussion.css"
+import "../styles/DisplayUsers.css"
+import Welcome from "./welcome"
+import { AiOutlineSend } from "react-icons/ai"
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { addMessageRoute, getMessage } from "../utils/url"
+import photo from "../media/profil.jpg"
 
-export default function DisplayDiscussion ({ currentChat }) {
-    const [messageSended, setMessageSended] = useState(""),
-          [messages, setMessages] = useState([]),
-          currentUserId = localStorage.getItem("userId"),
-          token = localStorage.getItem("token")
-    
-    const sendMsg = (e)=>{
-        e.preventDefault()
-        {(messageSended.length < 3) ? alert('message non valide '):
-            axios.post(addMessageRoute,{
-                    message : messageSended,
+// import io from "socket.io-client"
+// const socket = io.connect("http://localhost:8080")
+
+export default function DisplayDiscussion({ currentChat, conversationId}) {
+  const [messageSended, setMessageSended] = useState({
+    emoji: "",
+    text: "",
+  })
+  const [messages, setMessages] = useState([])
+  const currentUserId = localStorage.getItem("userId")
+
+  const sendMsg = e => {
+    e.preventDefault()
+    // socket.emit("send_message", messageSended)
+    {(messageSended.length < 3) ? alert('message non valide '):
+            axios.post(addMessageRoute,
+                {   
+                    conversationId,
+                    message : `${messageSended.text}`,
                     from : currentUserId,
                     to : currentChat.userId
-            })
+                })
             .then(() => {
-                setMessageSended("")
-                console.log("message envoyé avec succes");})
+                setMessageSended({
+                    emoji:"",
+                    text :""
+                })
+                })
             .catch((err) => console.log(err))            
         }
     }
-    const from = currentUserId
-    const to = currentChat.userId
+    // const from = currentUserId
+    // const to = currentChat.userId
+
+    // useEffect(()=>{
+    //     console.log("ensemble");
+    //     socket.on("receive_message", (data)=>{
+    //         alert(`receive_message ${data.text}`);
+    //     })
+    // },[socket])
+
 
     useEffect(()=>{
-        axios.get(`${getMessage}/${from}/${to}`)
+        // axios.get(`${getMessage}/${from}/${to}`)
+        console.log(`conversationId ${conversationId}`);
+        axios.get(`${getMessage}/${conversationId}`)
         .then((mes)=>{
-            setMessages(mes.data.messages)
+            setMessages(mes.data)
+            console.log(mes.data, 'ffffffffffff');
         })
         .catch(err =>console.error(err))
-    },[token, currentChat])
+    },[conversationId, messageSended])
 
-    console.log(messages ,"les messages reçus par conversation")
+    // console.log(messages ,"les messages reçus par conversation")
 
     return( currentChat.userId === "" ? <Welcome /> :
         <div className="discussionPage">
@@ -49,24 +71,29 @@ export default function DisplayDiscussion ({ currentChat }) {
                     <li className="status">online</li>
                 </ul>
                 <div></div>
+                <div></div>
+            </div>
+
+            <div className="allMessages">                
+                {   messages.map((message) => (
+                        <div className={message.from === currentUserId ? "msgSended own" : "msgSended" }>
+                            <div className="parentMsg">
+                                <p className="messageText">{message.message}</p>
+                            </div>
+                            <div className="date">
+                                {message.createdAt.split('T')[0]}, 
+                                {message.createdAt.split('T')[1].split('.')[0]}
+                            </div>
+                        </div>
+                    ))}
             </div>
           
-           <div className="allMessages">
-            <ul className='containerMessage'>
-                {messages ?
-                    ( messages.length > 0 ?
-                        messages.map((message) => 
-                        <li className={message.from === from ? 'msgSended' 
-                        : 'msgReceved'}>{message.message}</li>)
-                    :null)
-                :null
-                }
-            </ul>             
-           </div>
            <form className="message" onSubmit={sendMsg}>
-                <textarea onChange={(e)=> setMessageSended(e.target.value)} 
-                          value={messageSended} rows="1" 
-                          className="fieldMsg"
+                <textarea  placeholder="write your message here"
+                    onChange={(e)=> setMessageSended({
+                    text : e.target.value})} 
+                    value={messageSended.text} rows="1" 
+                    className="fieldMsg"
                 />
                 <button type="submit" className="btn">
                     <AiOutlineSend className="send" />
