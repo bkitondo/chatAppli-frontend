@@ -8,13 +8,7 @@ return(
         <div className='item' >
             <img  className='imageLogin' src={login} alt="" />
         </div>
-        {/* <BrowserRouter>
-            <Routes> */}
-                {/* <Route  path='/connexion' element={<SignIn/>} /> */}
-                <SignUp/>
-                {/* <Route  path ='/accueil' element={<HomePage/>} />
-            </Routes>
-        </BrowserRouter> */}
+        <SignUp/>
     </div>
 )
 }

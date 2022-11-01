@@ -7,43 +7,28 @@ import { useEffect, useState } from 'react'
 import { signUpRoute, createOrFindConversation} from '../utils/url'
 
 export default function DispayUsers({setCurrentChat, currentChat,setConversationId }){
-    const [contacts, setContacts] = useState([]),
-          [currentUser, setCurrentUser] = useState(""),
-          [online, setOnline] = useState(false)
-    
-    const token = localStorage.getItem("token"),
+    const [contacts, setContacts] = useState([]),    
+          token = localStorage.getItem("token"),
           currentUserId = localStorage.getItem("userId")
-
-    useEffect(()=>{
-        setCurrentUser(localStorage.getItem("userName"))
-        !currentUser ? setOnline(true) : setOnline(false)
-    }, [token]);
     
     useEffect(()=>{
         axios.get(`${signUpRoute}/${currentUserId}`)
         .then((response)=>{
             setContacts(response.data)
-            console.log(" les contacts",response.data);
         })
         .catch((err)=>{
             console.log(err);
         })
     },[token])
 
-
-    useEffect(()=>{
-        // console.log('dmcklqclqmcqmùlxmù');
-
-console.log(`from ${currentUserId} to ${currentChat.userId}`);
-
-            axios.get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
-            .then((conv)=>{
+  useEffect(()=>{
+        axios.get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
+        .then((conv)=>{
                 setConversationId(conv.data.conversation._id)
-            })
-            .catch((err) => { throw err})
+        })
+        .catch((err) => { throw err})
     },[currentChat.userId, currentUserId])
     
-
     return(
         <div  className="usersPage">
           <div className='searchContainer' >
