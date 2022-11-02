@@ -6,23 +6,18 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { signUpRoute, createOrFindConversation } from "../utils/url"
 
-export default function DispayUsers(
+export default function DispayUsers({
   setCurrentChat,
   currentChat,
-  setConversationId
-) {
+  setConversationId,
+}) {
   const [contacts, setContacts] = useState([])
   const token = localStorage.getItem("token")
   const currentUserId = localStorage.getItem("userId")
 
   useEffect(() => {
     axios
-      .get(`${signUpRoute}/${currentUserId}`, {
-        headers: {
-          "Content-type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-        },
-      })
+      .get(`${signUpRoute}/${currentUserId}`)
       .then(response => {
         setContacts(response.data)
       })
@@ -33,22 +28,14 @@ export default function DispayUsers(
 
   useEffect(() => {
     axios
-      .get(
-        `${createOrFindConversation}/${currentUserId}/${currentChat.userId}`,
-        {
-          headers: {
-            "Content-type": "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-          },
-        }
-      )
+      .get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
       .then(conv => {
         setConversationId(conv.data.conversation._id)
       })
       .catch(err => {
         throw err
       })
-  }, [currentChat.userId, currentUserId, setConversationId])
+  }, [currentChat.userId])
 
   return (
     <div className="usersPage">
