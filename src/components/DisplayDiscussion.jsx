@@ -9,46 +9,54 @@ import photo from "../media/profil.jpg"
 
 // import io from "socket.io-client"
 // const socket = io.connect("http://localhost:8080")
+// const [room, setRoom] = useState(" ")
 
-export default function DisplayDiscussion({ currentChat, conversationId }) {
+export default function DisplayDiscussion(currentChat, conversationId) {
+  // console.log(`curent ${currentChat.userId}  ${conversationId}`)
+  // setRoom = conversationId
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
   })
   const [messages, setMessages] = useState([])
+  // const [socketMessage, setSocketMessage] = useState(" ")
   const currentUserId = localStorage.getItem("userId")
 
   const sendMsg = e => {
     e.preventDefault()
-    // socket.emit("send_message", messageSended)
-    {
-      messageSended.length < 3
-        ? alert("message non valide ")
-        : axios
-            .post(addMessageRoute, {
-              conversationId,
-              message: `${messageSended.text}`,
-              from: currentUserId,
-              to: currentChat.userId,
+    // socket.emit("send_message", messageSended, room)
+    messageSended.length < 3
+      ? alert("message non valide ")
+      : axios
+          .post(addMessageRoute, {
+            conversationId,
+            message: `${messageSended.text}`,
+            from: currentUserId,
+            to: currentChat.userId,
+          })
+          .then(() => {
+            setMessageSended({
+              emoji: " ",
+              text: " ",
             })
-            .then(() => {
-              setMessageSended({
-                emoji: " ",
-                text: " ",
-              })
-            })
-            .catch(err => console.log(err))
-    }
+          })
+          .catch(err => console.log(err))
   }
   // const from = currentUserId
   // const to = currentChat.userId
 
-  // useEffect(()=>{
-  //     console.log("ensemble");
-  //     socket.on("receive_message", (data)=>{
-  //         alert(`receive_message ${data.text}`);
-  //     })
-  // },[socket])
+  // useEffect(() => {
+  //   socket.on("receive_message", data => {
+  //     // alert(`receive_message ${data.text}`)
+  //     setSocketMessage(data.text)
+  //   })
+  // }, [socket])
+
+  // const JoinRoom = () => {
+  //   if(room !== "") {
+  //     socket.emit("join_room", room)
+  //   }
+  // }
 
   useEffect(() => {
     // axios.get(`${getMessage}/${from}/${to}`)
@@ -56,19 +64,20 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
       .get(`${getMessage}/${conversationId}`)
       .then(mes => {
         setMessages(mes.data)
+        console.log(mes.data)
       })
       .catch(err => console.error(err))
   }, [conversationId, messageSended])
 
-  return( currentChat.userId === "" ? 
+  return currentChat.userId === "" ? (
     <Welcome />
-   : 
+  ) : (
     <div className="discussionPage">
       <div className="online">
         <img src={photo} className alt="" />
         <ul>
           <li className="userName">{currentChat.userName}</li>
-          <li className="status">online</li>
+          {/* <li className="status">{socketMessage}</li> */}
         </ul>
         <div></div>
         <div></div>

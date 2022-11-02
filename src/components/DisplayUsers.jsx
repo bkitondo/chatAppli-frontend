@@ -6,11 +6,11 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { signUpRoute, createOrFindConversation } from "../utils/url"
 
-export default function DispayUsers({
+export default function DispayUsers(
   setCurrentChat,
   currentChat,
-  setConversationId,
-}) {
+  setConversationId
+) {
   const [contacts, setContacts] = useState([])
   const token = localStorage.getItem("token")
   const currentUserId = localStorage.getItem("userId")
@@ -24,7 +24,7 @@ export default function DispayUsers({
       .catch(err => {
         console.log(err)
       })
-  }, [token])
+  }, [token, currentUserId])
 
   useEffect(() => {
     axios
@@ -35,7 +35,7 @@ export default function DispayUsers({
       .catch(err => {
         throw err
       })
-  }, [currentChat.userId, currentUserId])
+  }, [currentChat.userId, currentUserId, setConversationId])
 
   return (
     <div className="usersPage">
