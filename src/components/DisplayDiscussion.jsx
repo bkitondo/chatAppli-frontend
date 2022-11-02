@@ -10,8 +10,8 @@ import photo from "../media/profil.jpg"
 // import io from "socket.io-client"
 // const socket = io.connect("http://localhost:8080")
 // const [room, setRoom] = useState(" ")
-
-export default function DisplayDiscussion(currentChat, conversationId) {
+// const token = localStorage.getItem("token")
+export default function DisplayDiscussion(currentChat, { conversationId }) {
   // console.log(`curent ${currentChat.userId}  ${conversationId}`)
   // setRoom = conversationId
   const [messageSended, setMessageSended] = useState({
@@ -28,19 +28,28 @@ export default function DisplayDiscussion(currentChat, conversationId) {
     messageSended.length < 3
       ? alert("message non valide ")
       : axios
-          .post(addMessageRoute, {
-            conversationId,
-            message: `${messageSended.text}`,
-            from: currentUserId,
-            to: currentChat.userId,
-          })
+          .post(
+            addMessageRoute,
+            {
+              headers: {
+                "Content-type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+              },
+            },
+            {
+              conversationId,
+              message: `${messageSended.text}`,
+              from: currentUserId,
+              to: currentChat.userId,
+            }
+          )
           .then(() => {
             setMessageSended({
               emoji: " ",
               text: " ",
             })
           })
-          .catch(err => console.log(err))
+          .catch(() => console.log("erreur"))
   }
   // const from = currentUserId
   // const to = currentChat.userId
@@ -61,15 +70,20 @@ export default function DisplayDiscussion(currentChat, conversationId) {
   useEffect(() => {
     // axios.get(`${getMessage}/${from}/${to}`)
     axios
-      .get(`${getMessage}/${conversationId}`)
+      .get(`${getMessage}/${conversationId}`, {
+        headers: {
+          "Content-type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
       .then(mes => {
         setMessages(mes.data)
         console.log(mes.data)
       })
-      .catch(err => console.error(err))
-  }, [conversationId, messageSended])
+      .catch(() => console.error("requete echouée"))
+  }, [conversationId])
 
-  return currentChat.userId === "" ? (
+  return conversationId === "" ? (
     <Welcome />
   ) : (
     <div className="discussionPage">

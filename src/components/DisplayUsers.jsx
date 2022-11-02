@@ -17,18 +17,31 @@ export default function DispayUsers(
 
   useEffect(() => {
     axios
-      .get(`${signUpRoute}/${currentUserId}`)
+      .get(`${signUpRoute}/${currentUserId}`, {
+        headers: {
+          "Content-type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
       .then(response => {
         setContacts(response.data)
       })
-      .catch(err => {
-        console.log(err)
+      .catch(() => {
+        console.log("une erreur")
       })
   }, [token, currentUserId])
 
   useEffect(() => {
     axios
-      .get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
+      .get(
+        `${createOrFindConversation}/${currentUserId}/${currentChat.userId}`,
+        {
+          headers: {
+            "Content-type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        }
+      )
       .then(conv => {
         setConversationId(conv.data.conversation._id)
       })
