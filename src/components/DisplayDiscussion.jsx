@@ -12,6 +12,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
   const socket = useRef(io("http://localhost:8080"))
   const [messages, setMessages] = useState([])
   const currentUserId = localStorage.getItem("userId")
+  const [room, setRoom] = useState()
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
@@ -49,8 +50,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
   }
   useEffect(() => {
     socket.current.on("msg-received", data => {
-      console.log("socket envoie data", data)
-      alert(data.message)
+      setRoom(data)
     })
   }, [])
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
         setMessages(mes.data)
       })
       .catch(() => console.error("requete echouée"))
-    }, [messageSended, conversationId])
+    }, [messageSended, conversationId, room])
 
   return conversationId === "" || null ? (
     <Welcome />
