@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import "../styles/DisplayDiscussion.css"
 import "../styles/DisplayUsers.css"
 import Welcome from "./welcome"
@@ -6,27 +6,26 @@ import { AiOutlineSend } from "react-icons/ai"
 import axios from "axios"
 import { addMessageRoute, getMessage } from "../utils/url"
 import photo from "../media/profil.jpg"
-
-// import io from "socket.io-client"
-// const socket = io.connect("http://localhost:8080")
-// const [room, setRoom] = useState(" ")
-// const token = localStorage.getItem("token")
+import { io } from "socket.io-client"
 
 export default function DisplayDiscussion({ currentChat, conversationId }) {
-  // setRoom = conversationId
+  const socket = useRef(io("http://localhost:8080"))
+  const [messages, setMessages] = useState([])
+  const currentUserId = localStorage.getItem("userId")
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
   })
-  const [messages, setMessages] = useState([])
-  // const [socketMessage, setSocketMessage] = useState(" ")
-  const currentUserId = localStorage.getItem("userId")
-  console.log(`user online ${currentUserId}`)
+
+  useEffect(() => {
+    if (currentUserId) {
+      socket.current.emit("add-user", currentUserId)
+    }
+  }, [currentUserId])
 
   const sendMsg = e => {
     e.preventDefault()
-    // socket.emit("send_message", messageSended, room)
-    messageSended.length < 3
+    messageSended === null || messageSended === " " || messageSended.length < 0
       ? alert("message non valide ")
       : axios
           .post(addMessageRoute, {
@@ -36,6 +35,11 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
             to: currentChat.userId,
           })
           .then(() => {
+            socket.current.emit("send-msg", {
+              message: `${messageSended.text}`,
+              from: currentUserId,
+              receiver: currentChat.userId,
+            })
             setMessageSended({
               emoji: " ",
               text: " ",
@@ -43,32 +47,20 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
           })
           .catch(() => console.log("erreur"))
   }
-  // const from = currentUserId
-  // const to = currentChat.userId
-
-  // useEffect(() => {
-  //   socket.on("receive_message", data => {
-  //     // alert(`receive_message ${data.text}`)
-  //     setSocketMessage(data.text)
-  //   })
-  // }, [socket])
-
-  // const JoinRoom = () => {
-  //   if(room !== "") {
-  //     socket.emit("join_room", room)
-  //   }
-  // }
-
   useEffect(() => {
-    // axios.get(`${getMessage}/${from}/${to}`)
+    socket.current.on("msg-received", data => {
+      console.log("socket envoie data", data)
+      alert(data.message)
+    })
+  }, [])
+  useEffect(() => {
     axios
       .get(`${getMessage}/${conversationId}`)
       .then(mes => {
         setMessages(mes.data)
-        console.log(mes.data)
       })
       .catch(() => console.error("requete echouée"))
-  }, [messageSended, conversationId])
+    }, [messageSended, conversationId])
 
   return conversationId === "" || null ? (
     <Welcome />
@@ -83,7 +75,6 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
         <div></div>
         <div></div>
       </div>
-
       <div className="allMessages">
         {messages.map((message, index) => (
           <div
@@ -102,7 +93,6 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
           </div>
         ))}
       </div>
-
       <form className="message" onSubmit={sendMsg}>
         <textarea
           placeholder="write your message here"
