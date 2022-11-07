@@ -46,7 +46,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
               text: " ",
             })
           })
-          .catch(() => console.log("erreur"))
+          .catch(err => console.log(err))
   }
   useEffect(() => {
     socket.current.on("msg-received", data => {
@@ -59,8 +59,8 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
       .then(mes => {
         setMessages(mes.data)
       })
-      .catch(() => console.error("requete echouée"))
-    }, [messageSended, conversationId, room])
+      .catch(err => console.error(err))
+  }, [messageSended, conversationId, room])
 
   return conversationId === "" || null ? (
     <Welcome />

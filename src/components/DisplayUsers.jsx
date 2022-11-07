@@ -9,6 +9,7 @@ import { signUpRoute, createOrFindConversation } from "../utils/url"
 export default function DispayUsers({
   setCurrentChat,
   currentChat,
+  conversationId,
   setConversationId,
 }) {
   const [contacts, setContacts] = useState([])
@@ -21,8 +22,8 @@ export default function DispayUsers({
       .then(response => {
         setContacts(response.data)
       })
-      .catch(() => {
-        console.log("une erreur")
+      .catch(err => {
+        console.log(err)
       })
   }, [token, currentUserId])
 
@@ -35,7 +36,7 @@ export default function DispayUsers({
       .catch(err => {
         throw err
       })
-  }, [currentChat.userId])
+  }, [currentChat.userId, currentUserId, setConversationId])
 
   return (
     <div className="usersPage">
