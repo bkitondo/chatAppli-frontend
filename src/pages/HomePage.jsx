@@ -18,7 +18,6 @@ function HomePage() {
         setCurrentChat={setCurrentChat}
         currentChat={currentChat}
         setConversationId={setConversationId}
-        conversationId={conversationId}
       />
       <DisplayDiscussion
         currentChat={currentChat}
