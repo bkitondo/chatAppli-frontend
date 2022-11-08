@@ -9,7 +9,6 @@ import { signUpRoute, createOrFindConversation } from "../utils/url"
 export default function DispayUsers({
   setCurrentChat,
   currentChat,
-  conversationId,
   setConversationId,
 }) {
   const [contacts, setContacts] = useState([])

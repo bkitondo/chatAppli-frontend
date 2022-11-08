@@ -2,31 +2,36 @@ import React, { useState, useEffect, useRef } from "react"
 import "../styles/DisplayDiscussion.css"
 import "../styles/DisplayUsers.css"
 import Welcome from "./welcome"
-import { AiOutlineSend } from "react-icons/ai"
-import axios from "axios"
+import { AiOutlineSend, AiOutlineCamera } from "react-icons/ai"
+import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { addMessageRoute, getMessage } from "../utils/url"
+import axios from "axios"
 import photo from "../media/profil.jpg"
+// import Picker from "emoji-picker-react"
 import { io } from "socket.io-client"
 
 export default function DisplayDiscussion({ currentChat, conversationId }) {
   const socket = useRef(io("http://localhost:8080"))
   const [messages, setMessages] = useState([])
   const currentUserId = localStorage.getItem("userId")
+  // const [status, setStatus] = useState("false")
   const [room, setRoom] = useState()
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
   })
+  // console.log(Picker, "picker ");
 
   useEffect(() => {
     if (currentUserId) {
       socket.current.emit("add-user", currentUserId)
+      // setStatus("true")
     }
   }, [currentUserId])
 
   const sendMsg = e => {
     e.preventDefault()
-    messageSended === null || messageSended === " " || messageSended.length < 0
+    messageSended === "" || messageSended.length < 2
       ? alert("message non valide ")
       : axios
           .post(addMessageRoute, {
@@ -42,8 +47,8 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
               receiver: currentChat.userId,
             })
             setMessageSended({
-              emoji: " ",
-              text: " ",
+              emoji: "",
+              text: "",
             })
           })
           .catch(err => console.log(err))
@@ -70,7 +75,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
         <img src={photo} className alt="" />
         <ul>
           <li className="userName">{currentChat.userName}</li>
-          {/* <li className="status">{socketMessage}</li> */}
+          <li className="status">{`online`}</li>
         </ul>
         <div></div>
         <div></div>
@@ -94,13 +99,19 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
         ))}
       </div>
       <form className="message" onSubmit={sendMsg}>
-        <textarea
+        <input
           placeholder="write your message here"
           onChange={e => setMessageSended({ text: e.target.value })}
           value={messageSended.text}
           rows="1"
           className="fieldMsg"
         />
+        <div className="emoji">
+          <MdOutlineEmojiEmotions />
+        </div>
+        <div className="camera">
+          <AiOutlineCamera />
+        </div>
         <button type="submit" className="btn">
           <AiOutlineSend className="send" />
         </button>
