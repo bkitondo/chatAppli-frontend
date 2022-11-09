@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-self: center;
-    margin:  20%  20% 0;
+    margin:  15%  15% 0;
 }
 .champ{
     outline: none;
@@ -38,4 +38,48 @@
 .bouton:hover{
     background:#2c73ff;
     color: #FFF;
+}
+.defaultProfil{
+    width:100px;
+    height: auto;
+    border-radius: 100%;
+    /* align-self: center; */
+    object-fit: cover;
+}
+.profil-pic{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 0 auto;
+    border: #8b3eff solid 1px;
+    border-radius: 100px;
+}
+.add-picture-icon{
+    position:absolute;
+    border-radius: 100%;
+    bottom: 0;
+    /* right: 0; */
+    font-size: 20px;
+    background:#8b3eff;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+}
+.add-picture{
+    position: absolute;
+    width: 0px;
+    height: 0;
+    bottom: 0;
+    object-fit: cover;
+    right: 5px;
+    /* left: -10px; */
+    z-index: 2;
+    top:55px;
+    /* opacity: 0; */
+}
+.add-picture:hover{
+    cursor: pointer;
 }
