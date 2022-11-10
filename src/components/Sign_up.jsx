@@ -3,7 +3,7 @@ import "../styles/Pages.css"
 import React, { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { signUpRoute, cloudinary } from "../utils/url"
+import { signUpRoute, cloudinary, signInRoute } from "../utils/url"
 import defaultProfil from "../media/defaultProfil.png"
 import { AiOutlinePlus } from "react-icons/ai"
 
@@ -40,6 +40,20 @@ export default function SignUp() {
             password,
           })
           .then(() => {
+            axios
+            .post(signInRoute, {
+              email,
+              password,
+            })
+            .then(user => {
+              const token = user.data.token.split(" ")[1]
+              localStorage.setItem("token", token)
+              localStorage.setItem("userId", user.data.userId)
+              localStorage.setItem("userName", user.data.userName)
+              localStorage.setItem("picture", user.data.picture)
+              // navigate("/accueil")
+            })
+            .catch(err => console.log(err))
             setName(""),
             setEmail(""),
             setPassword(""),
@@ -47,8 +61,10 @@ export default function SignUp() {
               setImageDefault(defaultProfil)
             })
             .catch(err => console.log(err))
-            navigate("/")
-      })
+            // navigate("/")
+            
+            navigate("/accueil")
+          })
       .catch(err => {throw err})
     } 
     else {

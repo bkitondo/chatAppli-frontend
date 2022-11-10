@@ -78,7 +78,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
   ) : (
     <div className="discussionPage">
       <div className="online">
-        <img src={photo} className alt="" />
+        <img src={currentChat.picture} className alt="" />
         <ul>
           <li className="userName">{currentChat.userName}</li>
           <li className="status">{`online`}</li>

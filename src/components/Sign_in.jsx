@@ -22,6 +22,7 @@ export default function SignIn() {
         localStorage.setItem("token", token)
         localStorage.setItem("userId", user.data.userId)
         localStorage.setItem("userName", user.data.userName)
+        localStorage.setItem("picture", user.data.picture)
         navigate("/accueil")
       })
       .catch(err => console.log(err))
