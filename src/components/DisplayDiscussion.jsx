@@ -19,6 +19,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
   const [messageSended, setMessageSended] = useState({
     emoji: "",
     text: "",
+    media: "",
   })
   // console.log(Picker, "picker ");
 
@@ -37,18 +38,21 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
           .post(addMessageRoute, {
             conversationId,
             message: `${messageSended.text}`,
+            media : `${messageSended.media}`,
             from: currentUserId,
             to: currentChat.userId,
           })
           .then(() => {
             socket.current.emit("send-msg", {
               message: `${messageSended.text}`,
+              media : `${messageSended.media}`,
               from: currentUserId,
               receiver: currentChat.userId,
             })
             setMessageSended({
               emoji: "",
               text: "",
+              media:"",
             })
           })
           .catch(err => console.log(err))
@@ -67,12 +71,14 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
       .catch(err => console.error(err))
   }, [messageSended, conversationId, room])
 
+  console.log("mesage", messages);
+
   return conversationId === "" || null ? (
     <Welcome />
   ) : (
     <div className="discussionPage">
       <div className="online">
-        <img src={photo} className alt="" />
+        <img src={currentChat.picture} className alt="" />
         <ul>
           <li className="userName">{currentChat.userName}</li>
           <li className="status">{`online`}</li>

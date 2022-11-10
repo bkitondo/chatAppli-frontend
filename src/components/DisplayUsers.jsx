@@ -1,7 +1,6 @@
 import "../styles/DisplayUsers.css"
 import { RiSearchLine } from "react-icons/ri"
 import { FiMoreVertical } from "react-icons/fi"
-import photo from "../media/profil.jpg"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { signUpRoute, createOrFindConversation } from "../utils/url"
@@ -25,6 +24,7 @@ export default function DispayUsers({
         console.log(err)
       })
   }, [token, currentUserId])
+  console.log(contacts, "contact");
 
   useEffect(() => {
     axios
@@ -53,12 +53,13 @@ export default function DispayUsers({
                 setCurrentChat({
                   userName: contact.userName,
                   userId: contact._id,
+                  picture: contact.picture
                 })
               }
               className="everyUser"
               key={index}
             >
-              <img src={photo} alt="l'utilisateur" />
+              <img src={contact.picture} alt="l'utilisateur" />
               <ul>
                 <li className="userName">{contact.userName}</li>
               </ul>
