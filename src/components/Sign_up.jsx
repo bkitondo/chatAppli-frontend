@@ -5,7 +5,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { signUpRoute, cloudinary, signInRoute } from "../utils/url"
 import defaultProfil from "../media/defaultProfil.png"
-import { AiOutlinePlus } from "react-icons/ai"
+import { AiOutlinePlus} from "react-icons/ai"
 
 export default function SignUp() {
   const [name, setName] = useState("")
@@ -51,18 +51,10 @@ export default function SignUp() {
               localStorage.setItem("userId", user.data.userId)
               localStorage.setItem("userName", user.data.userName)
               localStorage.setItem("picture", user.data.picture)
-              // navigate("/accueil")
             })
             .catch(err => console.log(err))
-            setName(""),
-            setEmail(""),
-            setPassword(""),
-              setConfirPassword(""),
-              setImageDefault(defaultProfil)
             })
-            .catch(err => console.log(err))
-            // navigate("/")
-            
+            .catch(err => console.log(err))            
             navigate("/accueil")
           })
       .catch(err => {throw err})
