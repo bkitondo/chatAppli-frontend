@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom"
 export default function User() {
   const nav = useNavigate()
   const profil = localStorage.getItem("picture")
-  console.log("profil", profil);
 
   function Logout() {
     localStorage.clear()

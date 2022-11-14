@@ -24,7 +24,6 @@ export default function DispayUsers({
         console.log(err)
       })
   }, [token, currentUserId])
-  console.log(contacts, "contact");
 
   useEffect(() => {
     axios
