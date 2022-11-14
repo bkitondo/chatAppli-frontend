@@ -84,6 +84,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="text"
+          required
           placeholder="Nom"
           onChange={e => {
             setName(e.target.value)
@@ -93,6 +94,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="tel"
+          required
           placeholder="Email"
           onChange={e => {
             setEmail(e.target.value)
@@ -102,6 +104,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="password"
+          required
           placeholder="Mot de passe"
           onChange={e => {
             setPassword(e.target.value)
@@ -111,6 +114,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="password"
+          required
           placeholder="Confirmez mot de passe"
           onChange={e => {
             setConfirPassword(e.target.value)
