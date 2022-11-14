@@ -43,7 +43,6 @@
     width:100px;
     height: auto;
     border-radius: 100%;
-    /* align-self: center; */
     object-fit: cover;
 }
 .profil-pic{
@@ -59,26 +58,25 @@
     position:absolute;
     border-radius: 100%;
     bottom: 0;
-    /* right: 0; */
+    right: 0;
     font-size: 20px;
     background:#8b3eff;
     color: #fff;
     cursor: pointer;
     z-index: 1;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 .add-picture{
     position: absolute;
     width: 0px;
-    height: 0;
+    height: 40px;
     bottom: 0;
     object-fit: cover;
-    right: 5px;
-    /* left: -10px; */
+    right: -10px;
     z-index: 2;
-    top:55px;
-    /* opacity: 0; */
+    top:67px;
+    opacity: 0;
 }
 .add-picture:hover{
     cursor: pointer;

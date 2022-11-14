@@ -11,15 +11,14 @@ import { io } from "socket.io-client"
 
 export default function DisplayDiscussion({ currentChat, conversationId }) {
   const socket = useRef(io("http://localhost:8080"))
-  const [messages, setMessages] = useState([])
   const currentUserId = localStorage.getItem("userId")
-  const [file, setFile] = useState(null)
-  const [image, setImage] = useState(null)
+  const [messages, setMessages] = useState([])
+  const [file, setFile] = useState("")
+  const [fileSelected, setFileSelected] = useState("")
   const [room, setRoom] = useState()
   const [messageSended, setMessageSended] = useState({
-    emoji: "",
-    text: "",
-    media: "",
+    emoji: null,
+    text: null,
   })
   const formData = new FormData()
   formData.append("file", file)
@@ -33,46 +32,50 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
     }
   }, [currentUserId])
 
-  const sendMsg = e => {
+  const sendMsg = async(e) => {
     e.preventDefault()
 
      if (file || messageSended.text.length > 1)
-     { 
+     {  
+      let img = ""
+      console.log("declare img", img);
+
       if(file) {
-        console.log("if");
-        axios({
+      await  axios({
           method: "post",
           url:cloudinary,
           data: formData,
         })
         .then(image =>{
-          setImage(image.data.secure_url)
-          test = image.data.secure_url
+          console.log("change img", image.data.secure_url);
+          img = image.data.secure_url
         })
         .catch(err => {throw err})
       }
+      console.log("img apres", img);
+      console.log("send", messageSended.media);
       axios
         .post(addMessageRoute, {
             conversationId,
             message: messageSended.text,
-            media : test,
+            media : img,
             from: currentUserId,
             to: currentChat.userId,
           })
           .then(() => {
-            console.log("file in socket", file, "image in socket", image);
+            console.log("file in socket", file, "image in socket", messageSended.media);
             socket.current.emit("send-msg", {
               message: `${messageSended.text}`,
-              media : test,
+              media : img,
               from: currentUserId,
               receiver: currentChat.userId,
             })
             setMessageSended({
-              emoji: "",
+              emoji:"",
               text: "",
-              media:"",
             })
             setFile(null)
+            setFileSelected("")
           })
           .catch(err => console.log(err))
       }
@@ -113,12 +116,12 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
           <div
             key={index}
             className={
-              message.from === currentUserId ? "msgSended own" : "msgSended"
+              message?.from === currentUserId ? "msgSended own" : "msgSended"
             }
           >
-            <img className="messageMedia" src={message.media} alt="" />
+            {message?.media ? <img className="messageMedia" src={message.media} alt="" />: null}
             <div className="parentMsg">
-              <p className="messageText">{message.message}</p>
+            {message?.message ? <p className="messageText">{message.message}</p> : null}
             </div>
             <div className="date">
               {message.createdAt.split("T")[0]},
@@ -127,6 +130,7 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
           </div>
         ))}
       </div>
+      {fileSelected ? <img className="fileSelected"  src={fileSelected} />: null }
       <form className="message" onSubmit={sendMsg}>
         <textarea
           placeholder="write your message here"
@@ -144,7 +148,10 @@ export default function DisplayDiscussion({ currentChat, conversationId }) {
               accept="image/png, image/jpeg, image/jpg"
               name="sendImage"
               id="sendImage"
-              onChange={e => setFile(e.target.files[0])}
+              onChange={e => {
+                setFile(e.target.files[0])
+                setFileSelected(URL.createObjectURL(e.target.files[0]))
+              }}
             />
             <AiOutlineCamera  className="camera"/>
           </div>

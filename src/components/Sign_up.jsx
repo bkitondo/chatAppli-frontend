@@ -21,10 +21,10 @@ export default function SignUp() {
   formData.append("file", userImage)
   formData.append("upload_preset", "suc61h3y")
 
-  const Submit = e => {
+  const Submit = async(e) => {
     e.preventDefault()
     if (password === confirmPassword) {
-      axios({
+    await  axios({
         method: "post",
         url:cloudinary,
         data: formData,
@@ -32,7 +32,7 @@ export default function SignUp() {
       .then(image => {
         console.log(image);
         const picture = image.data.secure_url
-        axios
+      axios
           .post(signUpRoute, {
             userName: name,
             picture,
@@ -84,6 +84,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="text"
+          required
           placeholder="Nom"
           onChange={e => {
             setName(e.target.value)
@@ -93,6 +94,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="tel"
+          required
           placeholder="Email"
           onChange={e => {
             setEmail(e.target.value)
@@ -102,6 +104,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="password"
+          required
           placeholder="Mot de passe"
           onChange={e => {
             setPassword(e.target.value)
@@ -111,6 +114,7 @@ export default function SignUp() {
         <input
           className="champ"
           type="password"
+          required
           placeholder="Confirmez mot de passe"
           onChange={e => {
             setConfirPassword(e.target.value)
