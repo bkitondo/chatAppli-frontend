@@ -1,8 +1,8 @@
-import React from "react"
-import "../styles/DisplayDiscussion.css"
+import React from 'react'
+import '../styles/DisplayDiscussion.css'
 
 const Welcome = () => {
-  const userName = localStorage.getItem("userName")
+  const userName = localStorage.getItem('userName')
   return (
     <div className="discussionPage">
       <h1 className="userNameWelcome">welcome {userName}</h1>

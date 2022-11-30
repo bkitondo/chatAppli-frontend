@@ -1,7 +1,7 @@
-import React from "react"
-import login from "../media/login.jpg"
-import "../styles/Pages.css"
-import SignIn from "../components/Sign_in"
+import React from 'react'
+import login from '../media/login.jpg'
+import '../styles/Pages.css'
+import SignIn from '../components/Sign_in'
 
 const Connexion = () => {
   return (

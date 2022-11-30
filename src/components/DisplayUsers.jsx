@@ -1,9 +1,9 @@
-import "../styles/DisplayUsers.css"
-import { RiSearchLine } from "react-icons/ri"
-import { FiMoreVertical } from "react-icons/fi"
-import axios from "axios"
-import React, { useEffect, useState } from "react"
-import { signUpRoute, createOrFindConversation } from "../utils/url"
+import '../styles/DisplayUsers.css'
+import { RiSearchLine } from 'react-icons/ri'
+import { FiMoreVertical } from 'react-icons/fi'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { signUpRoute, createOrFindConversation } from '../utils/url'
 
 export default function DispayUsers({
   setCurrentChat,
@@ -11,8 +11,8 @@ export default function DispayUsers({
   setConversationId,
 }) {
   const [contacts, setContacts] = useState([])
-  const token = localStorage.getItem("token")
-  const currentUserId = localStorage.getItem("userId")
+  const token = localStorage.getItem('token')
+  const currentUserId = localStorage.getItem('userId')
 
   useEffect(() => {
     axios
@@ -27,7 +27,9 @@ export default function DispayUsers({
 
   useEffect(() => {
     axios
-      .get(`${createOrFindConversation}/${currentUserId}/${currentChat.userId}`)
+      .get(
+        `${createOrFindConversation}/${currentUserId}/${currentChat.userId}`,
+      )
       .then(conv => {
         setConversationId(conv.data.conversation._id)
       })
@@ -52,12 +54,11 @@ export default function DispayUsers({
                 setCurrentChat({
                   userName: contact.userName,
                   userId: contact._id,
-                  picture: contact.picture
+                  picture: contact.picture,
                 })
               }
               className="everyUser"
-              key={index}
-            >
+              key={index}>
               <img src={contact.picture} alt="l'utilisateur" />
               <ul>
                 <li className="userName">{contact.userName}</li>
