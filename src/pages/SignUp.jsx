@@ -1,7 +1,7 @@
-import React from "react"
-import login from "../media/login.jpg"
-import "../styles/Pages.css"
-import SignUp from "../components/Sign_up"
+import React from 'react'
+import login from '../media/login.jpg'
+import '../styles/Pages.css'
+import SignUp from '../components/Sign_up'
 
 const Inscription = () => {
   return (

@@ -1,15 +1,11 @@
-import React from "react"
-import { useState } from "react"
+import React from 'react'
+import { useState } from 'react'
 
-const imageUpload = ()=>{
-  const [image, setImage] = useState("")
-  return(
+const imageUpload = () => {
+  const [image, setImage] = useState('')
+  return (
     <form>
-        <input
-        type="file"
-        hidden
-        accept/>
+      <input type="file" hidden accept />
     </form>
   )
-
 }
