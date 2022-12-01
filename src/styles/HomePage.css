@@ -3,7 +3,7 @@
     flex-direction: row;
     width: 96%;
     justify-content: space-between;
-    padding: 2%;
+    padding: 2vh;
     background: #eaeaea;
-    height: 590px;
+    height: 96vh;
 }
