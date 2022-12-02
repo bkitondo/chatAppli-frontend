@@ -1,4 +1,3 @@
-import Menu from './Menu'
 import '../styles/Pages.css'
 import React, { useState } from 'react'
 import axios from 'axios'
@@ -66,9 +65,6 @@ export default function SignUp() {
   return (
     <main className="item">
       <form className="formulaire" onSubmit={Submit}>
-        <p style={{ textAlign: 'center', color: '#8b3eff' }}>
-          Bk Messenger
-        </p>
         <div className="profil-pic">
           <img src={imageDefault} className="defaultProfil" alt="" />
           <AiOutlinePlus className="add-picture-icon" />
@@ -124,9 +120,8 @@ export default function SignUp() {
           }}
           value={confirmPassword}
         />
-        <input className="bouton" type="submit" value="inscription" />
+        <input className="bouton" type="submit" value="Register" />
       </form>
-      <Menu />
     </main>
   )
 }
