@@ -121,38 +121,41 @@ export default function DisplayDiscussion({
         <div></div>
         <div></div>
       </div>
-      <div className="allMessages">
-        {messages.map((message, index) => (
-          <div
-            ref={scroll}
-            key={index}
-            className={
-              message?.from === currentUserId
-                ? 'msgSended own'
-                : 'msgSended'
-            }>
-            {message?.media ? (
-              <img
-                className="messageMedia"
-                src={message.media}
-                alt=""
-              />
-            ) : null}
-            <div className="parentMsg">
-              {message?.message ? (
-                <p className="messageText">{message.message}</p>
-              ) : null}
-            </div>
-            <div className="date">
-              {message.createdAt.split('T')[0]},
-              {message.createdAt.split('T')[1].split('.')[0]}
-            </div>
-          </div>
-        ))}
-      </div>
       {fileSelected ? (
-        <img className="fileSelected" src={fileSelected} />
-      ) : null}
+        <div className="allMessages">
+          <img className="fileSelected" src={fileSelected} />
+        </div>
+      ) : (
+        <div className="allMessages">
+          {messages.map((message, index) => (
+            <div
+              ref={scroll}
+              key={index}
+              className={
+                message?.from === currentUserId
+                  ? 'msgSended own'
+                  : 'msgSended'
+              }>
+              {message?.media ? (
+                <img
+                  className="messageMedia"
+                  src={message.media}
+                  alt=""
+                />
+              ) : null}
+              <div className="parentMsg">
+                {message?.message ? (
+                  <p className="messageText">{message.message}</p>
+                ) : null}
+              </div>
+              <div className="date">
+                {message.createdAt.split('T')[0]},
+                {message.createdAt.split('T')[1].split('.')[0]}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <form className="message" onSubmit={sendMsg}>
         <textarea
           placeholder="write your message here"

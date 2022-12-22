@@ -6,7 +6,7 @@ import SignIn from '../components/Sign_in'
 const Connexion = () => {
   return (
     <div className="loginPage">
-      <div className="item">
+      <div className="containerImage">
         <img className="imageLogin" src={login} alt="" />
       </div>
       <SignIn />

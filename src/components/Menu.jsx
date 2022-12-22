@@ -5,11 +5,8 @@ import '../styles/Menu.css'
 const Menu = () => {
   return (
     <nav>
-      <Link className="link" to="/">
-        connexion
-      </Link>
       <Link className="link" to="/inscription">
-        inscription
+        Create an account
       </Link>
     </nav>
   )

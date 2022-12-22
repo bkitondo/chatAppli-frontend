@@ -1,83 +1,88 @@
-.loginPage{
-    display: flex;
-    flex-direction: row;
-    padding: 0 5%;
+.loginPage {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  height: 80vh;
+  margin: 10vh 10%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.item{
-    width: 50%;
-    height: auto; 
+.item {
+  width: 50%;
 }
-.imageLogin{
-     width: 100%;
+.containerImage {
+  width: 50%;
 }
-.formulaire{
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    margin:  15%  15% 0;
+.imageLogin {
+  width: 100%;
 }
-.champ{
-    outline: none;
-    padding: 5px;
-    border-style: none;
-    border-bottom: solid 1px #8b3eff ;
-    font-size: 16px;
-    margin-top:4% ;
-    width: 96%;
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 15% 15% 0;
 }
-.bouton{
-    border-style: none;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 5%;
-    width: 100%;
-    background: #8b3eff;
-    color: #e9e8f6;
-    font-size: 16px;
+.champ {
+  outline: none;
+  padding: 5px;
+  border-style: none;
+  border-bottom: solid 1px #8b3eff;
+  font-size: 16px;
+  margin-top: 4%;
+  width: 96%;
 }
-.bouton:hover{
-    background:#2c73ff;
-    color: #FFF;
+.bouton {
+  border-style: none;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 5%;
+  width: 100%;
+  background: #8b3eff;
+  color: #e9e8f6;
+  font-size: 16px;
 }
-.defaultProfil{
-    width:100px;
-    height: auto;
-    border-radius: 100%;
-    object-fit: cover;
+.bouton:hover {
+  background: #2c73ff;
+  color: #fff;
 }
-.profil-pic{
-    display: flex;
-    width: 100px;
-    height: 100px;
-    position: relative;
-    margin: 0 auto;
-    border: #8b3eff solid 1px;
-    border-radius: 100px;
+.defaultProfil {
+  width: 80px;
+  height: auto;
+  border-radius: 100%;
+  object-fit: cover;
 }
-.add-picture-icon{
-    position:absolute;
-    border-radius: 100%;
-    bottom: 0;
-    right: 0;
-    font-size: 20px;
-    background:#8b3eff;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1;
-    width: 30px;
-    height: 30px;
+.profil-pic {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: 0 auto;
+  /* border: #8b3eff solid 1px; */
+  border-radius: 100px;
 }
-.add-picture{
-    position: absolute;
-    width: 0px;
-    height: 40px;
-    bottom: 0;
-    object-fit: cover;
-    right: -10px;
-    z-index: 2;
-    top:67px;
-    opacity: 0;
+.add-picture-icon {
+  position: absolute;
+  border-radius: 100%;
+  bottom: 0;
+  right: 0;
+  font-size: 20px;
+  background: #8b3eff;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
 }
-.add-picture:hover{
-    cursor: pointer;
+.add-picture {
+  position: absolute;
+  width: 0px;
+  height: 40px;
+  bottom: 0;
+  object-fit: cover;
+  right: -10px;
+  z-index: 2;
+  top: 67px;
+  opacity: 0;
+}
+.add-picture:hover {
+  cursor: pointer;
 }

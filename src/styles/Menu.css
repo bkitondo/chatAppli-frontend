@@ -1,8 +1,8 @@
 nav{
     display: flex;
     flex-direction:row;
-    justify-content: space-between;
-    margin: 5% 20% 0 ;   
+    justify-content: center;
+    margin: 7% 0 ; 
 }
 .link{
     text-decoration: none;

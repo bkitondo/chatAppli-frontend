@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { signInRoute } from '../utils/url'
+// import { Oval } from 'react-loader-spinner'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -29,10 +30,19 @@ export default function SignIn() {
   }
   return (
     <main className="item">
+      {/* <Oval
+        height="30"
+        width="30"
+        radius="9"
+        color="#8b3eff"
+        ariaLabel="loading"
+        wrapperStyle
+        wrapperClass
+      /> */}
       <form className="formulaire" onSubmit={Submit}>
-        <p style={{ textAlign: 'center', color: '#8b3eff' }}>
+        <h2 style={{ textAlign: 'center', color: '#8b3eff' }}>
           Bk Messenger
-        </p>
+        </h2>
         <input
           className="champ"
           type="tel"
@@ -45,13 +55,13 @@ export default function SignIn() {
         <input
           className="champ"
           type="password"
-          placeholder="Mot de passe"
+          placeholder="Password"
           name="Password"
           onChange={e => setPassword(e.target.value)}
           value={password}
           required
         />
-        <input className="bouton" type="submit" value="connexion" />
+        <input className="bouton" type="submit" value="To log in" />
       </form>
       <Menu />
     </main>
